@@ -1,3 +1,5 @@
+(to do uzupełnienia pozniej) - zmienic na angielski
+
 Pliki:
 - config.py
 globalne stałe i potrzebne rzeczy
@@ -11,18 +13,3 @@ funkcje do rysowania wykresów
 
 - correlations.py
 funkcje do analizy korelacji
-
-==============================================================
-PLAN PRACY
-- wybrać ciekawsze zależności, a nie robić wszystkiego bezmyślnie
-
-- zrobić skrypt do rysowania wykresów cen, w taki sposób, żeby wybrane dwa instrumenty
-finansowe nakładały się na siebie (Paweł)
-
-- wykresy punktowe zmian cen dwóch instrumentów + prosta z regresji liniowej (Daniel)
-
-- poszczególne korelacje między dziennymi zmianami cen: wykres macierz korelacji oraz wartości (Paweł)
-
-- markdown - ogarnąć sprawozdanie z projektu, takie krótkie podsumowanie, żeby to jakoś wyglądało schludnie (Wspólnie)
-
-==============================================================
