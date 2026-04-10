@@ -2,31 +2,34 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+import seaborn as sns
 
-def price_linear_plots_2_symbols(df: pd.DataFrame, combinations: list) -> None:
+def price_percent_change_comparison(df: pd.DataFrame, combinations: list) -> None:
     """
-    Draws linear plots of the selected financial combinations of the given symbols.
-    Saves the plots to a PDF file.
+    Creates a plot, consisting of many subplots comparing different financial instruments and their price percent changes over time.
     """
-    output_file = "price_linear_plots_2_symbols.pdf"
-    with PdfPages(output_file) as pdf:
-        for symbol in combinations:
-            x = df.index
-            y_1 = df[(symbol[0], "close")] / df[(symbol[0], "close")].iloc[0] * 100
-            y_2 = df[(symbol[1], "close")] / df[(symbol[1], "close")].iloc[0] * 100
+    data_combined = []
 
-            fig, ax = plt.subplots(figsize=(10, 6))
+    for symbol_pair in combinations:
+        temp_df = df.xs('close', axis=1, level=1)[list(symbol_pair)]
+
+        temp_df_perc = ((temp_df - temp_df.iloc[0]) / temp_df.iloc[0]) * 100
+        temp_df_perc=temp_df_perc.reset_index()
+
+        temp_df_melted = temp_df_perc.melt(id_vars='date', var_name='symbol', value_name='price_perc_change')
+        temp_df_melted['pair'] = f"{symbol_pair[0]}-{symbol_pair[1]}"
+
+        data_combined.append(temp_df_melted)
+
+    final_df = pd.concat(data_combined)
+
+    g = sns.relplot(data=final_df, kind='line',
+                    x='date', y='price_perc_change',
+                    hue='symbol', col = 'pair',
+                    col_wrap=3, facet_kws={'sharey': False},
+    )
 
 
-
-            ax.set_xlabel("Date")
-            ax.legend()
-            ax.grid(True, linestyle='--', alpha=0.6)
-
-            pdf.savefig()
-            ax.clear()
-
-        print(f"Plots saved to: {output_file}")
 
 
 def price_change_plots_2_symbols(df: pd.DataFrame, combinations: list) -> None:
@@ -70,24 +73,4 @@ def price_change_plots_2_symbols(df: pd.DataFrame, combinations: list) -> None:
         print(f"Plots saved to: {output_file}")
 
 
-if __name__ == "__main__":
-    main_df = pd.read_csv("prepared_data.csv", header=[0, 1], index_col=0, parse_dates=True)
-    main_df = main_df.iloc[1:] # first row with NaNs omitted
-
-
-    # example
-    price_change_plots_2_symbols(main_df, combinations=[('GCUSD', '^GSPC'),
-                                                        ('SIUSD', '^GSPC'),
-                                                        ('BZUSD', '^GSPC'),
-                                                        ('EURUSD', '^GSPC'),
-                                                        ('BTCUSD', '^GSPC'),
-                                                        ('ETHUSD', '^GSPC')
-                                                        ])
-
-    price_linear_plots_2_symbols(main_df, combinations=[('GCUSD', '^GSPC'),
-                                                        ('SIUSD', '^GSPC'),
-                                                        ('BZUSD', '^GSPC'),
-                                                        ('EURUSD', '^GSPC'),
-                                                        ('BTCUSD', '^GSPC'),
-                                                        ('ETHUSD', '^GSPC')
-                                                        ])
+# if __name__ == "__main__":
