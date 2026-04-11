@@ -13,3 +13,33 @@ funkcje do rysowania wykresów
 
 - correlations.py
 funkcje do analizy korelacji
+
+=========================================================================
+To-do-list
+=========================================================================
+
+- converting plots to seaborn and finishing the remaining ones
+
+- investing strategy simulations
+
+- markdown project report
+
+- general project clean-up
+
+======================
+- bierzemy wszystkie:
+* macierz korelacji >>> wybór najbardziej skorelowanych Daniel
+
+- dla wybranych:
+* wykres liniowy cen wszystkich instrumentów na jednym rysunku (standaryzowane) Paweł
+* zaznaczenie istotnych wydarzeń Paweł
+* wstęgi bollingera ? Paweł
+* średnie ruchome (osobny wykres) Paweł
+
+* jointplot, pairplot na zmianach cen (analiza rozkładów) Daniel
+* histogramy Daniel
+* proste regresji między zmianami cen Daniel
+
+* analiza wariancji ?
+
+* symulacja strategii inwestycyjnej Paweł
