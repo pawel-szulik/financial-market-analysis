@@ -4,9 +4,14 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import seaborn as sns
 
-def price_percent_change_comparison(df: pd.DataFrame, combinations: list) -> None:
+sns.set_style("whitegrid")
+
+def price_percentage_change_comparison(df: pd.DataFrame, combinations: list) -> None:
     """
-    Creates a plot, consisting of many subplots comparing different financial instruments and their price percent changes over time.
+    Creates a plot, consisting of many subplots comparing different financial instruments and their price percentage changes over time.
+    :param df: prepared dataframe
+    :param combinations: list of tuples with two symbols
+    :return: None
     """
     data_combined = []
 
@@ -17,7 +22,7 @@ def price_percent_change_comparison(df: pd.DataFrame, combinations: list) -> Non
         temp_df_perc=temp_df_perc.reset_index()
 
         temp_df_melted = temp_df_perc.melt(id_vars='date', var_name='symbol', value_name='price_perc_change')
-        temp_df_melted['pair'] = f"{symbol_pair[0]}-{symbol_pair[1]}"
+        temp_df_melted['pair'] = f"{symbol_pair[0]} vs {symbol_pair[1]}"
 
         data_combined.append(temp_df_melted)
 
@@ -29,6 +34,8 @@ def price_percent_change_comparison(df: pd.DataFrame, combinations: list) -> Non
                     col_wrap=3, facet_kws={'sharey': False},
     )
 
+    g = (g.set_axis_labels("Date", "Price change (%)"))
+    g = (g.set_titles(template="Comparison: {col_name}", size=14))
 
 
 
