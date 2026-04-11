@@ -43,6 +43,10 @@ class DataManager:
         self.open_returns: pd.DataFrame | None = None
 
     def load_everything(self, selected_files: list[str]):
+        """
+        Loads all CSV files from the given list found in self.path.
+        param: selected_files: list[str]
+        """
         dfs = []
         found_files = {file.name: file for file in self.path.rglob("*.csv")}
 
@@ -68,6 +72,8 @@ class DataManager:
     def get_returns(self, price_type: str = "close") -> pd.DataFrame:
         """
         Calculates percentage returns for given price type.
+        param: price_type: str
+        return: pd.DataFrame
         """
         price_map = {
             "close": (self.close_prices, "close_returns"),
