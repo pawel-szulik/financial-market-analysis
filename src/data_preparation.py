@@ -53,5 +53,5 @@ if __name__ == "__main__":
                       "USDCHF.csv", "USDCNH.csv", "USDJPY.csv", "USDPLN.csv", "USDRUB.csv", "DJI.csv", "FTSE.csv", "GSPC.csv", "HSI.csv",
                       "IXIC.csv", "N225.csv", "RUT.csv", "STOXX50E.csv", "VIX.csv"]
 
-    main_df = data_concat("price_charts_database_2026-03-04", selected_files)
+    main_df = data_concat("database_2026-03-04", selected_files)
     main_df.to_csv("prepared_data.csv")
