@@ -128,3 +128,26 @@ class DataManager:
             setattr(self, attr_name, overall_returns)
 
         return overall_returns
+
+    def comparison_df_prep(self, combinations: list) -> pd.DataFrame:
+
+        df = self.get_total_returns(price_type="close")
+
+        data_combined = []
+
+        for symbol_pair in combinations:
+            found_symbols = [s for s in symbol_pair if s in df.columns]
+
+            temp_df = df[found_symbols].copy().dropna()
+
+
+            temp_df = temp_df.reset_index()
+            temp_df.columns.values[0] = 'date'
+
+            temp_df_melted = temp_df.melt(id_vars='date', var_name='symbol', value_name='price_perc_change')
+            temp_df_melted['pair'] = f"{symbol_pair[0]} vs {symbol_pair[1]}"
+
+            data_combined.append(temp_df_melted)
+
+        final_df = pd.concat(data_combined)
+        return final_df
