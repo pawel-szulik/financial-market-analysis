@@ -79,5 +79,9 @@ def price_change_plots_2_symbols(df: pd.DataFrame, combinations: list) -> None:
 
         print(f"Plots saved to: {output_file}")
 
-
-# if __name__ == "__main__":
+def heatmap_corr(df: pd.DataFrame) -> None:
+    sns.heatmap(df,
+                cmap="coolwarm",
+                center=0,
+                vmin=-1,
+                vmax=1)

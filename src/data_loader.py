@@ -7,6 +7,7 @@ def data_prep_for_concat(extra_df: pd.DataFrame) -> pd.DataFrame:
     :param extra_df: contains data to be connected to the main dataframe
     :return: modified extra_df
     """
+
     if extra_df.empty:
         raise ValueError("Empty dataframe")
 
@@ -16,7 +17,7 @@ def data_prep_for_concat(extra_df: pd.DataFrame) -> pd.DataFrame:
     df = df.drop(columns=["change", "changePercent"])
     df = df.set_index("date")
 
-    df.columns = pd.MultiIndex.from_product([[symbol], df.columns])
+    df.columns = pd.MultiIndex.from_product([df.columns, [symbol]])
 
     return df
 
@@ -42,28 +43,38 @@ class DataManager:
         self.open_prices: pd.DataFrame | None = None
         self.open_returns: pd.DataFrame | None = None
 
-    def load_everything(self, selected_files: list[str]):
+    def load_everything(self, selected_files: list[str] | None = None):
         """
         Loads all CSV files from the given list found in self.path.
-        param: selected_files: list[str]
+        param: selected_files: list[str] | None
         """
         dfs = []
         found_files = {file.name: file for file in self.path.rglob("*.csv")}
+        if not found_files:
+            raise ValueError(f"No csv files found in {self.path}")
 
-        for file_name in selected_files:
-            if file_name in found_files:
-                file_path = found_files[file_name]
-                try:
-                    df = pd.read_csv(file_path, parse_dates=["date"])
+        if selected_files is not None:
+            missing = set(selected_files) - set(found_files)
+            if missing:
+                raise ValueError(f"Files not found: {missing}")
+            files_to_load = selected_files
+        else:
+            files_to_load = found_files.keys()
 
-                    prepared = data_prep_for_concat(df)
-                    dfs.append(prepared)
+        for file_name in files_to_load:
+            file_path = found_files[file_name]
 
-                except Exception as e:
-                    raise RuntimeError(f"Error reading file {file_name}") from e
+            try:
+                df = pd.read_csv(file_path, parse_dates=["date"])
+
+                prepared = data_prep_for_concat(df)
+                dfs.append(prepared)
+
+            except Exception as e:
+                raise RuntimeError(f"Error reading file {file_name}: {e}") from e
 
         if not dfs:
-            raise ValueError(f"No csv files found in {self.path}")
+            raise ValueError(f"No data loaded")
 
         self.raw_data = pd.concat(dfs, axis=1, join="outer")
         self.close_prices = self.raw_data["close"]
