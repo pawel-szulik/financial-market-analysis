@@ -4,38 +4,13 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.dates as mdates
 import seaborn as sns
+from data_loader import DataManager
 
 sns.set_style("darkgrid")
 
-def comparison_df_prep(df: pd.DataFrame, combinations: list) -> pd.DataFrame:
-    """
-    Prepares a df for plotting the comparison.
-    :param df: specified dataframe
-    :param combinations: list of tuples with two symbols (of financial instruments)
-    :return: pd.DataFrame -
-    """
-    data_combined = []
+def comparison_plot(dm: DataManager, combinations: list) -> None:
 
-    for symbol_pair in combinations:
-        found_symbols = [s for s in symbol_pair if s in df.columns]
-
-        temp_df_perc = df[found_symbols].copy()
-        temp_df_perc = temp_df_perc.dropna()
-
-        temp_df_perc=temp_df_perc.reset_index()
-        temp_df_perc.columns.values[0] = 'date'
-
-        temp_df_melted = temp_df_perc.melt(id_vars='date', var_name='symbol', value_name='price_perc_change')
-        temp_df_melted['pair'] = f"{symbol_pair[0]} vs {symbol_pair[1]}"
-
-        data_combined.append(temp_df_melted)
-
-    final_df = pd.concat(data_combined)
-    return final_df
-
-def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
-
-    final_df = comparison_df_prep(df, combinations)
+    final_df = dm.comparison_df_prep(combinations)
 
     g = sns.relplot(data=final_df, kind='line',
                     x='date', y='price_perc_change',
@@ -52,9 +27,11 @@ def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
             ax.set_ylabel("Price change % (linear scale)")
 
     g.set_axis_labels("Date")
-    g.set_titles(template="Comparison: {col_name}", size=14)
+    g.set_titles(template="{col_name}", size=14)
 
     add_market_events(g)
+
+    plt.tight_layout()
 
 
 def add_market_events(g: sns.FacetGrid) -> None:
