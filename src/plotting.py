@@ -81,7 +81,7 @@ def price_change_plots_2_symbols(df: pd.DataFrame, combinations: list) -> None:
 
 def heatmap_corr(df: pd.DataFrame) -> None:
     sns.heatmap(df,
-                cmap="coolwarm",
+                cmap="RdBu_r",
                 center=0,
                 vmin=-1,
                 vmax=1)

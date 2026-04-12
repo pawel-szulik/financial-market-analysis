@@ -9,14 +9,16 @@ def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.Dat
     :return: tuple[pd.DataFrame, pd.DataFrame]
     """
     cols = df.columns
-    corrs = pd.DataFrame(index=cols, columns=cols, dtype=float)
-    p_vals = pd.DataFrame(index=cols, columns=cols, dtype=float)
+    corrs = pd.DataFrame(index=cols, columns=cols)
+    p_vals = pd.DataFrame(index=cols, columns=cols)
 
     for idx_i, i in enumerate(cols):
         for idx_j, j in enumerate(cols):
-            if idx_j < idx_i:
+            if idx_j == idx_i:
+                corrs.loc[i, j] = 1
+                p_vals.loc[i, j] = 0
+            if idx_j <= idx_i:
                 continue
-
             valid = df[[i, j]].dropna()
             if corr_type == "pearson":
                 c, p = stats.pearsonr(valid[i], valid[j])
@@ -31,7 +33,7 @@ def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.Dat
             p_vals.loc[i, j] = p
             p_vals.loc[j, i] = p
 
-    return corrs, p_vals
+    return corrs.astype(float), p_vals.astype(float)
 
 
 def regression(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -42,12 +44,11 @@ def regression(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
 
     cols = df.columns
-    slopes = pd.DataFrame(index=cols, columns=cols, dtype=float)
-    p_vals = pd.DataFrame(index=cols, columns=cols, dtype=float)
+    slopes = pd.DataFrame(index=cols, columns=cols)
+    p_vals = pd.DataFrame(index=cols, columns=cols)
 
     for i in cols:
         for j in cols:
-
             valid = df[[i, j]].dropna()
             x = valid[i].values
             y = valid[j].values
@@ -57,4 +58,4 @@ def regression(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
             slopes.loc[i, j] = reg.slope
             p_vals.loc[i, j] = reg.pvalue
 
-    return slopes, p_vals
+    return slopes.astype(float), p_vals.astype(float)
