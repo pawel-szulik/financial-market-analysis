@@ -140,7 +140,6 @@ class DataManager:
 
             temp_df = df[found_symbols].copy().dropna()
 
-
             temp_df = temp_df.reset_index()
             temp_df.columns.values[0] = 'date'
 
@@ -151,3 +150,36 @@ class DataManager:
 
         final_df = pd.concat(data_combined)
         return final_df
+
+    def sma_data_prep(self, symbols: list, n: int = 20, n_std : int = 2) -> dict:
+        if self.close_prices is None:
+            raise ValueError("Data not loaded")
+
+        combined_dict = {}
+
+        for symbol in symbols:
+            if symbol not in self.close_prices.columns:
+                raise ValueError(f"Symbol {symbol} not found in close_prices")
+
+            prices = self.close_prices[symbol].dropna()
+            sma = prices.rolling(window=n).mean()
+            std = prices.rolling(window=n).std()
+            upper_band = sma + (std * n_std)
+            lower_band = sma - (std * n_std)
+
+            symbol_df = pd.DataFrame({
+                "price": prices,
+                "symbol": symbol,
+                "sma" : sma,
+                "upper_band": upper_band,
+                "lower_band": lower_band
+            }).dropna()
+
+            combined_dict[symbol] = symbol_df
+
+        return combined_dict
+
+
+
+
+
