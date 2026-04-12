@@ -66,6 +66,10 @@ def regression(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 
     for i in cols:
         for j in cols:
+            if i == j:
+                slopes.loc[i, j] = 1
+                p_vals.loc[i, j] = 0
+                continue
             valid = df[[i, j]].dropna()
             x = valid[i].values
             y = valid[j].values
