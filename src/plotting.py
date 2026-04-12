@@ -2,28 +2,24 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
-import matplotlib.dates as mdates
 import seaborn as sns
 
-sns.set_style("darkgrid")
+sns.set_style("whitegrid")
 
-def comparison_df_prep(df: pd.DataFrame, combinations: list) -> pd.DataFrame:
+def price_percentage_change_comparison(df: pd.DataFrame, combinations: list) -> None:
     """
-    Prepares a df for plotting the comparison.
-    :param df: specified dataframe
-    :param combinations: list of tuples with two symbols (of financial instruments)
-    :return: pd.DataFrame -
+    Creates a plot, consisting of many subplots comparing different financial instruments and their price percentage changes over time.
+    :param df: prepared dataframe
+    :param combinations: list of tuples with two symbols
+    :return: None
     """
     data_combined = []
 
     for symbol_pair in combinations:
-        found_symbols = [s for s in symbol_pair if s in df.columns]
+        temp_df = df.xs('close', axis=1, level=1)[list(symbol_pair)]
 
-        temp_df_perc = df[found_symbols].copy()
-        temp_df_perc = temp_df_perc.dropna()
-
+        temp_df_perc = ((temp_df - temp_df.iloc[0]) / temp_df.iloc[0]) * 100
         temp_df_perc=temp_df_perc.reset_index()
-        temp_df_perc.columns.values[0] = 'date'
 
         temp_df_melted = temp_df_perc.melt(id_vars='date', var_name='symbol', value_name='price_perc_change')
         temp_df_melted['pair'] = f"{symbol_pair[0]} vs {symbol_pair[1]}"
@@ -31,49 +27,16 @@ def comparison_df_prep(df: pd.DataFrame, combinations: list) -> pd.DataFrame:
         data_combined.append(temp_df_melted)
 
     final_df = pd.concat(data_combined)
-    return final_df
-
-def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
-
-    final_df = comparison_df_prep(df, combinations)
 
     g = sns.relplot(data=final_df, kind='line',
                     x='date', y='price_perc_change',
                     hue='symbol', col = 'pair',
-                    col_wrap=3, facet_kws={'sharey': False, 'sharex': False}
+                    col_wrap=3, facet_kws={'sharey': False},
     )
-    for ax in g.axes.flat:
-        title = ax.get_title()
-        if "BTCUSD" in title:
-            ax.set_yscale('symlog')
-            ax.set_ylabel("Price change % (log scale)")
-        else:
-            ax.set_yscale('linear')
-            ax.set_ylabel("Price change % (linear scale)")
 
-    g.set_axis_labels("Date")
-    g.set_titles(template="Comparison: {col_name}", size=14)
+    g = (g.set_axis_labels("Date", "Price change (%)"))
+    g = (g.set_titles(template="Comparison: {col_name}", size=14))
 
-    add_market_events(g)
-
-
-def add_market_events(g: sns.FacetGrid) -> None:
-    # test events - more to be added
-    events = {'2020-02-24': 'Covid-19',
-              '2022-02-24': "Ukraine's invasion",
-              '2025-04-09': "USA tariffs on China"}
-
-
-    for ax in g.axes.flat:
-        xmin, xmax = ax.get_xlim()
-        ymin, ymax = ax.get_ylim()
-
-        for date, label in events.items():
-            event_date = pd.to_datetime(date)
-            event_num = mdates.date2num(event_date)
-            if xmin <= event_num <= xmax:
-                ax.axvline(x=event_date, color='red', linestyle="--", alpha=0.5)
-                ax.text(event_date, ymax, label, rotation=90, color='darkred', ha='right', va='top', bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
 
 
 def price_change_plots_2_symbols(df: pd.DataFrame, combinations: list) -> None:
@@ -116,3 +79,5 @@ def price_change_plots_2_symbols(df: pd.DataFrame, combinations: list) -> None:
 
         print(f"Plots saved to: {output_file}")
 
+
+# if __name__ == "__main__":
