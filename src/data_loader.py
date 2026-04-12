@@ -80,7 +80,7 @@ class DataManager:
         self.close_prices = self.raw_data["close"]
         self.open_prices = self.raw_data["open"]
 
-    def get_returns(self, price_type: str = "close") -> pd.DataFrame:
+    def get_daily_returns(self, price_type: str = "close") -> pd.DataFrame:
         """
         Calculates percentage returns for given price type.
         param: price_type: str
@@ -106,3 +106,25 @@ class DataManager:
 
         return returns
 
+    def get_total_returns(self, price_type: str = "close") -> pd.DataFrame:
+        price_map = {
+            "close": (self.close_prices, "close_returns"),
+            "open": (self.open_prices, "open_returns"),
+        }
+
+        if price_type not in price_map:
+            raise ValueError(f"Unsupported price_type: {price_type}")
+
+        prices, attr_name = price_map[price_type]
+        overall_returns = getattr(self, attr_name)
+
+        if overall_returns is None:
+            if prices is None:
+                raise ValueError(f"{price_type.capitalize()} prices not loaded")
+
+            first_prices = prices.bfill().iloc[0]
+            overall_returns = (prices - first_prices) / first_prices * 100
+
+            setattr(self, attr_name, overall_returns)
+
+        return overall_returns
