@@ -1,5 +1,6 @@
 import pandas as pd
 import scipy.stats as stats
+import numpy as np
 
 def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
@@ -34,6 +35,22 @@ def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.Dat
             p_vals.loc[j, i] = p
 
     return corrs.astype(float), p_vals.astype(float)
+
+def corr_score(corrs: pd.DataFrame, pvals: pd.DataFrame) -> pd.Series:
+    """
+    Sums absolute significant correlations and returns a score for each asset.
+    :param corrs: pd.DataFrame
+    :param pvals: pd.DataFrame
+    :return: pd.Series
+    """
+    mask = pvals < 0.05
+    filtered_corrs = corrs.abs() * mask
+
+    arr = filtered_corrs.to_numpy(copy=True)
+    np.fill_diagonal(arr, 0)
+
+    score = arr.sum(axis=1)
+    return pd.Series(score, index=filtered_corrs.index).sort_values(ascending=False)
 
 
 def regression(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
