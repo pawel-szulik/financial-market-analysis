@@ -1,10 +1,9 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
 import matplotlib.dates as mdates
 import seaborn as sns
-from data_loader import DataManager
+from .data_loader import DataManager
 
 sns.set_style("darkgrid")
 
@@ -55,7 +54,7 @@ def price_change_distributions(df: pd.DataFrame) -> None:
     sns.pairplot(df,
                  kind="reg",
                  plot_kws={
-                     "scatter_kws": {"s": 3, "alpha": 0.6, "color": "#4DA3FF"},
+                     "scatter_kws": {"s": 3, "alpha": 0.5, "color": "#4DA3FF"},
                      "line_kws": {"color": "red", "linewidth": 1}},
                  diag_kws={"edgecolor":"none", "linewidth":0, "alpha":1})
 
