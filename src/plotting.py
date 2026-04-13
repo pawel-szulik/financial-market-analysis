@@ -47,7 +47,7 @@ def comparison_plot(dm: DataManager, combinations: list) -> None:
 
     g = sns.relplot(data=final_df, kind='line',
                     x='date', y='price_perc_change',
-                    hue='symbol', col = 'pair',
+                    hue='symbol', col = 'pair', linewidth=0.7,
                     col_wrap=3, facet_kws={'sharey': False, 'sharex': False}
     )
     for ax in g.axes.flat:
@@ -64,7 +64,6 @@ def comparison_plot(dm: DataManager, combinations: list) -> None:
 
     add_market_events_special(g)
 
-    plt.tight_layout()
 
 
 def add_market_events_special(g: sns.FacetGrid) -> None:
@@ -74,6 +73,32 @@ def add_market_events_special(g: sns.FacetGrid) -> None:
 
         add_market_events(ax, xmin, xmax, ymax)
 
+
+
+def sma_change_plot(dm: DataManager, symbols: list) -> None:
+    df_dict = dm.sma_data_prep(symbols)
+    for symbol, df in df_dict.items():
+        date = df.columns[0]
+        df['date'] = pd.to_datetime(df[date])
+        df = df.sort_values(by=['date'])
+
+        df['lower_band'] = np.where(df['lower_band'] < df['sma'] * 0.2,
+                                    df['sma'] * 0.2,
+                                    df['lower_band'])
+
+        sns.lineplot(data=df,x=date, y='sma', color='gold', linewidth=1.5, label = 'SMA')
+        sns.lineplot(data=df,x=date, y='price', color='black', alpha=0.3, linewidth=0.3, label = 'Price')
+        sns.lineplot(data=df, x=date, y='lower_band', color ='red', linestyle='--', label = 'Lower band')
+        sns.lineplot(data=df, x=date, y='upper_band', color='green', linestyle='--', label = 'Upper band')
+
+        plt.title(f"SMA {symbol}")
+        plt.legend(loc='upper left')
+
+        if "BTC" in symbol:
+            plt.yscale('log')
+            plt.ylim(bottom=0.1)
+
+        plt.show()
 
 def price_change_distributions(df: pd.DataFrame) -> None:
     sns.pairplot(df,
