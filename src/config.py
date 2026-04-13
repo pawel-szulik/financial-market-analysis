@@ -3,6 +3,11 @@ CATEGORIES = {"commodities": ('historical-price-eod/full', ['BZUSD', 'SIUSD', 'G
            "crypto": ('historical-price-eod/full', ['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'SOLUSD', 'XRPUSD', 'BNBUSD']),
            "indexes": ('historical-price-eod/full', ['^GSPC', '^DJI', '^IXIC', '^RUT', '^FTSE', '^N225', '^HSI', '^STOXX50E', '^VIX'])}
 
+# events - more to be added
+EVENTS = {'2020-02-24': 'Covid-19',
+          '2022-02-24': "Ukraine's invasion",
+          '2025-04-09': "USA tariffs on China"}
+
 # Commodities (Towary i Surowce)
 # BZUSD – Brent Crude Oil (Ropa naftowa typu Brent)
 # SIUSD – Silver (Srebro kwotowane w dolarach)
