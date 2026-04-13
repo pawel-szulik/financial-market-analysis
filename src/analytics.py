@@ -81,3 +81,44 @@ def regression(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
             p_vals.loc[i, j] = reg.pvalue
 
     return slopes.astype(float), p_vals.astype(float)
+
+
+def longest_drawdown(df: pd.DataFrame) -> pd.DataFrame:
+    results = []
+
+    for col in df.columns:
+        prices = df[col].dropna()
+
+        run_max = prices.cummax()
+        under = prices < run_max
+
+        group_id = (under != under.shift()).cumsum()
+
+        periods = []
+
+        for _, group in under.groupby(group_id):
+            if group.iloc[0]:  # tylko okresy under water
+                start = group.index[0]
+                end = group.index[-1]
+                length = (end - start).days
+
+                periods.append({
+                    "start": start,
+                    "end": end,
+                    "length": length
+                })
+
+        if periods:
+            longest = max(periods, key=lambda x: x["length"])
+        else:
+            longest = {"start": None, "end": None, "length": 0}
+
+        results.append({
+            "asset": col,
+            "start": longest["start"],
+            "end": longest["end"],
+            "length": longest["length"]
+        })
+
+    return pd.DataFrame(results)
+

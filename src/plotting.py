@@ -29,7 +29,7 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
                     bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
 
 
-def rolling_volatility(df: pd.DataFrame, window: int) -> None:
+def rolling_volatility_plot(df: pd.DataFrame, window: int) -> None:
     temp = df.rolling(window).var(ddof=0).pow(0.5)
     temp = temp.dropna()
 
