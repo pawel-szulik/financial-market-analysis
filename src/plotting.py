@@ -19,7 +19,7 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
                        linestyle="--",
                        alpha=0.5,
                        linewidth=1)
-            ax.text(event_date,
+            ax.text(event_date - pd.Timedelta(days=30),
                     ymax,
                     label,
                     rotation=90,
@@ -29,8 +29,10 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
                     bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
 
 
-def rolling_volatility(df: pd.DataFrame) -> None:
-    temp = df.rolling(100).var(ddof=0).pow(0.5)
+def rolling_volatility(df: pd.DataFrame, window: int) -> None:
+    temp = df.rolling(window).var(ddof=0).pow(0.5)
+    temp = temp.dropna()
+
     ax = sns.lineplot(data=temp, dashes=False)
     ax.legend(loc='upper left', bbox_to_anchor=(0.9, 1))
     ymax = temp.max().max()
