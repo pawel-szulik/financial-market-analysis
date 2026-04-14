@@ -75,7 +75,9 @@ def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
     g = sns.relplot(data=final_df, kind='line',
                     x='date', y='price_perc_change',
                     hue='symbol', col = 'pair', linewidth=0.7,
-                    col_wrap=3, facet_kws={'sharey': False, 'sharex': False}
+                    palette="deep",
+                    col_wrap=3,
+                    facet_kws={'sharey': False, 'sharex': False}
     )
     for ax in g.axes.flat:
         xmin, xmax = ax.get_xlim()
@@ -87,6 +89,7 @@ def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
         if "Bitcoin" in title:
             ax.set_yscale('symlog')
             ax.set_ylabel("Price change % (log scale)")
+            ax.set_ylim(-100)
         else:
             ax.set_yscale('linear')
             ax.set_ylabel("Price change % (linear scale)")
@@ -108,10 +111,10 @@ def sma_change_plot(df: pd.DataFrame, symbols: list) -> None:
 
         plt.figure(figsize=(10, 5))
 
-        ax=sns.lineplot(data=df,x=date, y='sma', color='gold', linewidth=1.5, label = 'SMA')
-        sns.lineplot(data=df,x=date, y='price', color='black', alpha=0.3, linewidth=0.3, label = 'Price')
-        sns.lineplot(data=df, x=date, y='lower_band', color ='red', linestyle='--', label = 'Lower band')
-        sns.lineplot(data=df, x=date, y='upper_band', color='green', linestyle='--', label = 'Upper band')
+        ax=sns.lineplot(data=df,x=date, y='sma', color='#E2B05E', linewidth=1.5, label = 'SMA')
+        sns.lineplot(data=df,x=date, y='price', color='white', alpha=0.3, linewidth=0.3, label = 'Price')
+        sns.lineplot(data=df, x=date, y='lower_band', color ='#CD5C5C', linestyle='--', label = 'Lower band')
+        sns.lineplot(data=df, x=date, y='upper_band', color='#556B2F', linestyle='--', label = 'Upper band')
 
         xmin, xmax = ax.get_xlim()
         ymin, ymax = ax.get_ylim()
