@@ -151,7 +151,7 @@ class DataManager:
         final_df = pd.concat(data_combined)
         return final_df
 
-    def sma_data_prep(self, symbols: list, n: int = 20, n_std : int = 2) -> dict:
+    def sma_data_prep(self, symbols: list, n: int = 200, n_std : int = 2) -> dict:
         if self.close_prices is None:
             raise ValueError("Data not loaded")
 
@@ -173,7 +173,7 @@ class DataManager:
                 "sma" : sma,
                 "upper_band": upper_band,
                 "lower_band": lower_band
-            }).dropna()
+            }).dropna().reset_index()
 
             combined_dict[symbol] = symbol_df
 
