@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 
-from .config import NAMES
+from src.config import NAMES
 
 def data_prep_for_concat(extra_df: pd.DataFrame) -> pd.DataFrame:
     """

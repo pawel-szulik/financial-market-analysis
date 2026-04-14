@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import seaborn as sns
 
-from .config import EVENTS
-from . import analytics as aly
+from src.config import EVENTS
+import src.analytics as aly
 
 sns.set_theme(style="dark")
 
@@ -14,12 +14,25 @@ plt.rcParams.update({
     "axes.facecolor": "#161616",
     "savefig.facecolor": "#161616",
 
-    "axes.edgecolor": "#aaaaaa",
+    "axes.edgecolor": "#cccccc",
     "axes.labelcolor": "#dddddd",
 
     "xtick.color": "#cccccc",
     "ytick.color": "#cccccc",
-})
+
+    "text.color": "#dddddd",
+    "axes.titlecolor": "#dddddd",
+    "axes.titleweight": "bold",
+
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "axes.spines.left": True,
+    "axes.spines.bottom": True,
+
+    "legend.edgecolor": "none",
+    "legend.framealpha": 0,          # usuwa tło (clean look)
+    "legend.labelcolor": "#dddddd",
+    })
 
 def add_market_events(ax, xmin, xmax, ymax) -> None:
     for date, label in EVENTS.items():
@@ -36,10 +49,11 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
                     ymax,
                     label,
                     rotation=90,
-                    color='darkred',
+                    color='#ef9a9a',
                     ha='right',
                     va='top',
-                    bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=1))
+                    size=10,
+                    bbox=dict(facecolor='black', alpha=0.6, edgecolor='none', pad=1))
 
 
 def rolling_volatility_plot(df: pd.DataFrame, window: int) -> None:
