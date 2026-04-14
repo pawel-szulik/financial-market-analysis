@@ -3,6 +3,36 @@ CATEGORIES = {"commodities": ('historical-price-eod/full', ['BZUSD', 'SIUSD', 'G
            "crypto": ('historical-price-eod/full', ['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'SOLUSD', 'XRPUSD', 'BNBUSD']),
            "indexes": ('historical-price-eod/full', ['^GSPC', '^DJI', '^IXIC', '^RUT', '^FTSE', '^N225', '^HSI', '^STOXX50E', '^VIX'])}
 
+NAMES = {
+    'BZUSD': "Brent Crude Oil",
+    'SIUSD': "Silver",
+    'GCUSD': "Gold",
+    'EURUSD': "EURUSD",
+    'USDJPY': "USDJPY",
+    "GBPUSD": "GBPUSD",
+    'USDCHF': "USDCHF",
+    'USDCAD': "USDCAD",
+    'USDCNH': "USDCNH",
+    'USDRUB': "USDRUB",
+    'USDPLN': "USDPLN",
+    'BTCUSD': "Bitcoin",
+    'ETHUSD': "Ethereum",
+    'USDTUSD': "Tether",
+    'USDCUSD': "USD Coin",
+    'SOLUSD': "Solana",
+    'XRPUSD': "XRP",
+    'BNBUSD': "Binance Coin",
+    '^GSPC': "S&P 500",
+    '^DJI': "Dow Jones",
+    '^IXIC': "NASDAQ",
+    '^RUT': "Russell 2000",
+    '^FTSE': "FTSE 100",
+    '^N225': "Nikkei 225",
+    '^HSI': "Hang Seng Index",
+    '^STOXX50E': "EURO STOXX 50",
+    '^VIX': "VIX"
+}
+
 # events - more to be added
 EVENTS = {'2020-02-24': 'Covid-19',
           '2022-02-24': "Ukraine's invasion",

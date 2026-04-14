@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+from .config import NAMES
 
 def data_prep_for_concat(extra_df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -76,7 +77,7 @@ class DataManager:
         if not dfs:
             raise ValueError(f"No data loaded")
 
-        self.raw_data = pd.concat(dfs, axis=1, join="outer")
+        self.raw_data = pd.concat(dfs, axis=1, join="outer").rename(columns=NAMES)
         self.close_prices = self.raw_data["close"]
         self.open_prices = self.raw_data["open"]
 
