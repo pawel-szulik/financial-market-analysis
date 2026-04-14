@@ -3,11 +3,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import seaborn as sns
-from .data_loader import DataManager
+
 from .config import EVENTS
-import analytics as aly
+from . import analytics as aly
 
 sns.set_theme(style="dark")
+
+plt.rcParams.update({
+    "figure.facecolor": "#161616",
+    "axes.facecolor": "#161616",
+    "savefig.facecolor": "#161616",
+
+    "axes.edgecolor": "#aaaaaa",
+    "axes.labelcolor": "#dddddd",
+
+    "xtick.color": "#cccccc",
+    "ytick.color": "#cccccc",
+})
 
 def add_market_events(ax, xmin, xmax, ymax) -> None:
     for date, label in EVENTS.items():
