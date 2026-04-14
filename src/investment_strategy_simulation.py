@@ -1,11 +1,8 @@
 import pandas as pd
 
-
-def investment_strategy_sim(close_prices: pd.DataFrame, symbols: list, monthly_investment_pln: float = 500.0, start_date: str='2024-10-01'):
+def investment_strategy_sim(close_prices: pd.DataFrame, symbols: list, monthly_investment_pln: float = 500.0, start_date: str='2024-10-01') -> pd.DataFrame:
 
     summary_table = []
-
-    monthly_returns_table = {}
 
     for symbol in symbols:
 
@@ -16,7 +13,7 @@ def investment_strategy_sim(close_prices: pd.DataFrame, symbols: list, monthly_i
 
         total_units_bought = 0
         total_money_invested = 0
-        monthly_returns = []
+
         for date in purchase_dates:
             current_unit_price = prices.asof(date)
             current_USDPLN_rate = currency_exchange_rates.asof(date)
@@ -27,20 +24,12 @@ def investment_strategy_sim(close_prices: pd.DataFrame, symbols: list, monthly_i
             total_units_bought += units_bought
             total_money_invested += monthly_investment_pln
 
-            current_investment_value = total_units_bought * current_unit_price * current_USDPLN_rate
-            monthly_returns.append({
-                'date': date,
-                'Total money invested' : round(total_money_invested, 2),
-                'Portfolio value' : round(current_investment_value, 2),
-                'Monthly % returns' : round((current_investment_value - total_money_invested) / total_money_invested * 100, 2),
-            })
-
         final_price_usd = prices.iloc[-1]
         final_USDPLN_rate = currency_exchange_rates.asof(prices.index[-1])
 
         total_investment_value = total_units_bought * final_price_usd * final_USDPLN_rate
         total_profit = total_investment_value - total_money_invested
-        total_profit_perc = (total_investment_value - total_money_invested) / total_investment_value * 100
+        total_profit_perc = (total_investment_value - total_money_invested) / total_money_invested * 100
 
         summary_table.append({
             'symbol': symbol,
@@ -50,7 +39,5 @@ def investment_strategy_sim(close_prices: pd.DataFrame, symbols: list, monthly_i
             'Final profit_perc': round(total_profit_perc, 2),
         })
 
-        monthly_returns_table[symbol] = pd.DataFrame(monthly_returns)
-
-    return pd.DataFrame(summary_table).sort_values(by='Final profit_perc', ascending=False), monthly_returns_table
+    return pd.DataFrame(summary_table).sort_values(by='Final profit_perc', ascending=False)
 
