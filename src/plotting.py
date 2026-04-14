@@ -5,6 +5,7 @@ import matplotlib.dates as mdates
 import seaborn as sns
 from .data_loader import DataManager
 from .config import EVENTS
+import analytics as aly
 
 sns.set_theme(style="dark")
 
@@ -41,9 +42,9 @@ def rolling_volatility_plot(df: pd.DataFrame, window: int) -> None:
     add_market_events(ax, xmin, xmax, ymax)
 
 
-def comparison_plot(dm: DataManager, combinations: list) -> None:
+def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
 
-    final_df = dm.comparison_df_prep(combinations)
+    final_df = aly.comparison_df_prep(df, combinations)
 
     g = sns.relplot(data=final_df, kind='line',
                     x='date', y='price_perc_change',
@@ -51,8 +52,13 @@ def comparison_plot(dm: DataManager, combinations: list) -> None:
                     col_wrap=3, facet_kws={'sharey': False, 'sharex': False}
     )
     for ax in g.axes.flat:
+        xmin, xmax = ax.get_xlim()
+        ymin, ymax = ax.get_ylim()
+
+        add_market_events(ax, xmin, xmax, ymax)
+
         title = ax.get_title()
-        if "BTCUSD" in title:
+        if "Bitcoin" in title:
             ax.set_yscale('symlog')
             ax.set_ylabel("Price change % (log scale)")
         else:
@@ -62,21 +68,9 @@ def comparison_plot(dm: DataManager, combinations: list) -> None:
     g.set_axis_labels("Date")
     g.set_titles(template="{col_name}", size=14)
 
-    add_market_events_special(g)
 
-
-
-def add_market_events_special(g: sns.FacetGrid) -> None:
-    for ax in g.axes.flat:
-        xmin, xmax = ax.get_xlim()
-        ymin, ymax = ax.get_ylim()
-
-        add_market_events(ax, xmin, xmax, ymax)
-
-
-
-def sma_change_plot(dm: DataManager, symbols: list) -> None:
-    df_dict = dm.sma_data_prep(symbols)
+def sma_change_plot(df: pd.DataFrame, symbols: list) -> None:
+    df_dict = aly.sma_data_prep(df, symbols)
     for symbol, df in df_dict.items():
         date = df.columns[0]
         df['date'] = pd.to_datetime(df[date])
@@ -86,18 +80,30 @@ def sma_change_plot(dm: DataManager, symbols: list) -> None:
                                     df['sma'] * 0.2,
                                     df['lower_band'])
 
-        sns.lineplot(data=df,x=date, y='sma', color='gold', linewidth=1.5, label = 'SMA')
+        plt.figure(figsize=(10, 5))
+
+        ax=sns.lineplot(data=df,x=date, y='sma', color='gold', linewidth=1.5, label = 'SMA')
         sns.lineplot(data=df,x=date, y='price', color='black', alpha=0.3, linewidth=0.3, label = 'Price')
         sns.lineplot(data=df, x=date, y='lower_band', color ='red', linestyle='--', label = 'Lower band')
         sns.lineplot(data=df, x=date, y='upper_band', color='green', linestyle='--', label = 'Upper band')
 
-        plt.title(f"SMA {symbol}")
-        plt.legend(loc='upper left')
+        xmin, xmax = ax.get_xlim()
+        ymin, ymax = ax.get_ylim()
 
-        if "BTC" in symbol:
+        add_market_events(ax, xmin, xmax, ymax)
+
+        title = f"{symbol}'s Simple Moving Average"
+
+        if "Bitcoin" in symbol:
             plt.yscale('log')
-            plt.ylim(bottom=0.1)
+            title = f"{symbol}'s Simple Moving Average (log scale)"
+            plt.ylabel("Price (log scale)")
+        else:
+            plt.ylabel("Price")
 
+        plt.xlabel("Date")
+        plt.title(title)
+        plt.legend(loc='upper left')
         plt.show()
 
 def price_change_distributions(df: pd.DataFrame) -> None:
