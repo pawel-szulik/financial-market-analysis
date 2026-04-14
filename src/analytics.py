@@ -122,3 +122,50 @@ def longest_drawdown(df: pd.DataFrame) -> pd.DataFrame:
 
     return pd.DataFrame(results)
 
+def comparison_df_prep(df: pd.DataFrame, combinations: list) -> pd.DataFrame:
+
+    data_combined = []
+
+    for symbol_pair in combinations:
+        found_symbols = [s for s in symbol_pair if s in df.columns]
+
+        temp_df = df[found_symbols].copy().dropna()
+
+        temp_df = (temp_df / temp_df.iloc[0] - 1) * 100
+        temp_df = temp_df.reset_index()
+        temp_df.columns.values[0] = 'date'
+
+        temp_df_melted = temp_df.melt(id_vars='date', var_name='symbol', value_name='price_perc_change')
+        temp_df_melted['pair'] = f"{symbol_pair[0]} vs {symbol_pair[1]}"
+
+        data_combined.append(temp_df_melted)
+
+    final_df = pd.concat(data_combined)
+    return final_df
+
+def sma_data_prep(df: pd.DataFrame, symbols: list, n: int = 200, n_std : int = 2) -> dict:
+
+    combined_dict = {}
+
+    for symbol in symbols:
+        if symbol not in df.columns:
+            raise ValueError(f"Symbol {symbol} not found in close_prices")
+
+        prices = df[symbol].dropna()
+        sma = prices.rolling(window=n).mean()
+        std = prices.rolling(window=n).std()
+        upper_band = sma + (std * n_std)
+        lower_band = sma - (std * n_std)
+
+        symbol_df = pd.DataFrame({
+            "price": prices,
+            "symbol": symbol,
+            "sma" : sma,
+            "upper_band": upper_band,
+            "lower_band": lower_band
+        }).dropna().reset_index()
+
+        combined_dict[symbol] = symbol_df
+
+    return combined_dict
+
