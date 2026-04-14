@@ -76,7 +76,7 @@ def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
                     x='date', y='price_perc_change',
                     hue='symbol', col = 'pair', linewidth=0.7,
                     palette="deep",
-                    col_wrap=3,
+                    col_wrap=5,
                     facet_kws={'sharey': False, 'sharex': False}
     )
     for ax in g.axes.flat:
