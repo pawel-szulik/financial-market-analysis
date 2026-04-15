@@ -82,7 +82,7 @@ class DataManager:
         self.close_prices = self.raw_data["close"]
         self.open_prices = self.raw_data["open"]
 
-        self.close_returns = self.close_prices.pct_change().dropna()
+        self.close_returns = self.close_prices.pct_change() * 100
 
 
 

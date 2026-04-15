@@ -4,6 +4,14 @@ import numpy as np
 from itertools import combinations
 
 
+def mean_significance(df: pd.DataFrame) -> pd.DataFrame:
+    mean = df.mean()
+    _, p_v = stats.ttest_1samp(df, popmean=0, axis=0)
+
+    return  pd.DataFrame({
+        "mean": mean,
+        "p_value": p_v})
+
 def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Computes a table of selected correlation coefficients along with their p-values.
