@@ -12,6 +12,25 @@ def mean_significance(df: pd.DataFrame) -> pd.DataFrame:
         "mean": mean,
         "p_value": p_v})
 
+
+def sign_test(df: pd.DataFrame, alternative: str) -> pd.DataFrame:
+    results = {}
+
+    for col in df.columns:
+        series = df[col].dropna()
+
+        n = len(series)
+        k = (series > 0).sum()
+
+        test = stats.binomtest(k, n, p=0.5, alternative=alternative)
+
+        results[col] = {
+            "win_rate": (k / n) * 100,
+            "p_value": test.pvalue,
+        }
+
+    return pd.DataFrame(results).T
+
 def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     """
     Computes a table of selected correlation coefficients along with their p-values.

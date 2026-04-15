@@ -157,12 +157,12 @@ def heatmap_corr(df: pd.DataFrame) -> None:
                 vmin=-1,
                 vmax=1)
 
-def highlight_significant(pvals: pd.DataFrame):
+def highlight_significant(pvals: pd.DataFrame, lvl: float = 0.05):
     """
     Marks significant results at the 5% level in given DataFrame.
     """
     def styler(df_values: pd.DataFrame):
-        mask = pvals < 0.05
+        mask = pvals < lvl
 
         return pd.DataFrame(
             np.where(mask, "background-color: #8C4F4F", "background-color: #2B2B2B"),
