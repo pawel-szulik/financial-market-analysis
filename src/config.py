@@ -34,9 +34,16 @@ NAMES = {
 }
 
 # events - more to be added
-EVENTS = {'2020-02-24': 'Covid-19',
-          '2022-02-24': "Ukraine's invasion",
-          '2025-04-09': "USA tariffs on China"}
+EVENTS = {'2000-03-10':'Dot-com bubble burst',
+          '2001-09-11':'9/11 attacks',
+          '2008-09-15':'2008 financial crisis',
+          '2013-11-29':"Bitcoin's first $1k",
+          '2010-05-02':'EU debt crisis',
+          '2014-11-27':"Oil's crash",
+          '2018-03-22':'US-China Trade War',
+          '2020-03-12':'Covid-19',
+          '2022-02-24':'Russian Invasion',
+          }
 
 # Commodities (Towary i Surowce)
 # BZUSD – Brent Crude Oil (Ropa naftowa typu Brent)
