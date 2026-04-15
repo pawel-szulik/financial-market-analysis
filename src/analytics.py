@@ -1,6 +1,7 @@
 import pandas as pd
 import scipy.stats as stats
 import numpy as np
+from itertools import combinations
 
 
 def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -122,11 +123,16 @@ def longest_drawdown(df: pd.DataFrame) -> pd.DataFrame:
 
     return pd.DataFrame(results)
 
-def comparison_df_prep(df: pd.DataFrame, combinations: list) -> pd.DataFrame:
+
+def make_pairs(symbols: list[str]) -> list[tuple[str, str]]:
+    return list(combinations(symbols, 2))
+
+
+def comparison_df_prep(df: pd.DataFrame, combinations_l: list) -> pd.DataFrame:
 
     data_combined = []
 
-    for symbol_pair in combinations:
+    for symbol_pair in combinations_l:
         found_symbols = [s for s in symbol_pair if s in df.columns]
 
         temp_df = df[found_symbols].copy().dropna()
