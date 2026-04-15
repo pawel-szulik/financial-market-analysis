@@ -145,17 +145,38 @@ def price_change_distributions(df: pd.DataFrame) -> None:
                  diag_kws={"edgecolor":"none", "linewidth":0, "alpha":1, "color":"#2C6A8A"})
 
 
-def heatmap_corr(df: pd.DataFrame) -> None:
+def heatmap_corr(df: pd.DataFrame, highlight: list[str] = None) -> None:
     cmap = LinearSegmentedColormap.from_list(
         "custom_dark",
-        ["#3A7BD5", "#1A1D26", "#E05A5A"]
+        ["#3A7BD5", "black", "#E05A5A"]
     )
+    cmap.set_bad("#B89B5E")
 
-    sns.heatmap(df,
+    mask = np.eye(df.shape[0], dtype=bool)
+
+    plt.figure(figsize=(10, 8))
+
+    ax = sns.heatmap(df,
+                mask=mask,
                 cmap=cmap,
                 center=0,
                 vmin=-1,
                 vmax=1)
+
+    highlight = set(highlight or [])
+
+    # bold for the x-axis
+    for label in ax.get_xticklabels():
+        if label.get_text() in highlight:
+            label.set_fontweight("bold")
+            label.set_color("#FFF9C4")
+
+    # bold for the y-axis
+    for label in ax.get_yticklabels():
+        if label.get_text() in highlight:
+            label.set_fontweight("bold")
+            label.set_color("#FFF9C4")
+
 
 def highlight_significant(pvals: pd.DataFrame, lvl: float = 0.05):
     """
