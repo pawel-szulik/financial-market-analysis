@@ -165,7 +165,7 @@ def highlight_significant(pvals: pd.DataFrame):
         mask = pvals < 0.05
 
         return pd.DataFrame(
-            np.where(mask, "background-color: #8C4F4F", ""),
+            np.where(mask, "background-color: #8C4F4F", "background-color: #2B2B2B"),
             index=df_values.index,
             columns=df_values.columns
         )
