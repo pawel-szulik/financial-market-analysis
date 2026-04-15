@@ -42,7 +42,7 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
 
         if xmin <= event_num <= xmax:
             ax.axvline(x=event_date,
-                       color='red',
+                       color='white',
                        linestyle="--",
                        alpha=0.5,
                        linewidth=1)
@@ -54,7 +54,7 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
                     ha='right',
                     va='top',
                     size=10,
-                    bbox=dict(facecolor='black', alpha=0.6, edgecolor='none', pad=1))
+                    bbox=dict(facecolor='black', alpha=0.5, edgecolor='none', pad=1))
 
 
 def rolling_volatility_plot(df: pd.DataFrame, window: int) -> None:
@@ -77,14 +77,12 @@ def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
                     x='date', y='price_perc_change',
                     hue='symbol', col = 'pair', linewidth=0.7,
                     palette="deep",
-                    col_wrap=5,
+                    col_wrap=3,
                     facet_kws={'sharey': False, 'sharex': False}
     )
     for ax in g.axes.flat:
         xmin, xmax = ax.get_xlim()
         ymin, ymax = ax.get_ylim()
-
-        add_market_events(ax, xmin, xmax, ymax)
 
         title = ax.get_title()
         if "Bitcoin" in title:
@@ -133,7 +131,7 @@ def sma_change_plot(df: pd.DataFrame, symbols: list) -> None:
 
         plt.xlabel("Date")
         plt.title(title)
-        plt.legend(loc='upper left')
+        plt.legend(loc='lower right')
         plt.show()
 
 def price_change_distributions(df: pd.DataFrame) -> None:
