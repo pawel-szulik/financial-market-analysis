@@ -33,7 +33,6 @@ NAMES = {
     '^VIX': "VIX"
 }
 
-# events - more to be added
 EVENTS = {'2000-03-10':'Dot-com bubble burst',
           '2001-09-11':'9/11 attacks',
           '2008-09-15':'2008 financial crisis',

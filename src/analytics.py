@@ -162,7 +162,7 @@ def comparison_df_prep(df: pd.DataFrame, combinations_l: list) -> pd.DataFrame:
     for symbol_pair in combinations_l:
         found_symbols = [s for s in symbol_pair if s in df.columns]
 
-        temp_df = df[found_symbols].copy().dropna()
+        temp_df = df[found_symbols].dropna()
 
         temp_df = (temp_df / temp_df.iloc[0] - 1) * 100
         temp_df = temp_df.reset_index()
@@ -181,10 +181,9 @@ def sma_data_prep(df: pd.DataFrame, symbols: list, n: int = 200, n_std : int = 2
     combined_dict = {}
 
     for symbol in symbols:
-        if symbol not in df.columns:
-            raise ValueError(f"Symbol {symbol} not found in close_prices")
 
         prices = df[symbol].dropna()
+
         sma = prices.rolling(window=n).mean()
         std = prices.rolling(window=n).std()
         upper_band = sma + (std * n_std)

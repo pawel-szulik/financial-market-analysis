@@ -81,9 +81,6 @@ def comparison_plot(df: pd.DataFrame, combinations: list) -> None:
                     facet_kws={'sharey': False, 'sharex': False}
     )
     for ax in g.axes.flat:
-        xmin, xmax = ax.get_xlim()
-        ymin, ymax = ax.get_ylim()
-
         title = ax.get_title()
         if "Bitcoin" in title:
             ax.set_yscale('symlog')
@@ -104,6 +101,7 @@ def sma_change_plot(df: pd.DataFrame, symbols: list) -> None:
         df['date'] = pd.to_datetime(df[date])
         df = df.sort_values(by=['date'])
 
+        # lower_band shape fix
         df['lower_band'] = np.where(df['lower_band'] < df['sma'] * 0.2,
                                     df['sma'] * 0.2,
                                     df['lower_band'])
