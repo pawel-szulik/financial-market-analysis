@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from matplotlib.colors import LinearSegmentedColormap
 import seaborn as sns
 
 from src.config import EVENTS
@@ -58,7 +59,7 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
 
 def rolling_volatility_plot(df: pd.DataFrame, window: int) -> None:
     temp = df.rolling(window).var(ddof=0).pow(0.5)
-    temp = temp.dropna()
+    #temp = temp.dropna()
 
     ax = sns.lineplot(data=temp, dashes=False)
     ax.legend(loc='upper left', bbox_to_anchor=(0.9, 1))
@@ -139,14 +140,19 @@ def price_change_distributions(df: pd.DataFrame) -> None:
     sns.pairplot(df,
                  kind="reg",
                  plot_kws={
-                     "scatter_kws": {"s": 3, "alpha": 0.5, "color": "#4DA3FF"},
-                     "line_kws": {"color": "red", "linewidth": 1}},
-                 diag_kws={"edgecolor":"none", "linewidth":0, "alpha":1})
+                     "scatter_kws": {"s": 3, "alpha": 0.5, "color": "#2C6A8A"},
+                     "line_kws": {"color": "#F53A1C", "linewidth": 1}},
+                 diag_kws={"edgecolor":"none", "linewidth":0, "alpha":1, "color":"#2C6A8A"})
 
 
 def heatmap_corr(df: pd.DataFrame) -> None:
+    cmap = LinearSegmentedColormap.from_list(
+        "custom_dark",
+        ["#3A7BD5", "#1A1D26", "#E05A5A"]
+    )
+
     sns.heatmap(df,
-                cmap="RdBu_r",
+                cmap=cmap,
                 center=0,
                 vmin=-1,
                 vmax=1)
@@ -159,7 +165,7 @@ def highlight_significant(pvals: pd.DataFrame):
         mask = pvals < 0.05
 
         return pd.DataFrame(
-            np.where(mask, "background-color: red", ""),
+            np.where(mask, "background-color: #8C4F4F", ""),
             index=df_values.index,
             columns=df_values.columns
         )
