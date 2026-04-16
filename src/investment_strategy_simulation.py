@@ -9,7 +9,7 @@ def investment_strategy_sim(close_prices: pd.DataFrame, symbols: list, monthly_i
         prices = close_prices[symbol].loc[start_date:].dropna()
         currency_exchange_rates = close_prices['USDPLN'].loc[start_date:].dropna()
 
-        purchase_dates = prices.resample('BMS').first().index
+        purchase_dates = prices.resample('BMS').first().index # Business Month Start
 
         total_units_bought = 0
         total_money_invested = 0
