@@ -4,6 +4,27 @@ import numpy as np
 from itertools import combinations
 
 
+def remove_outliers(df: pd.DataFrame, IQR_multiplier: float = 1.5) -> pd.DataFrame:
+    df = df.copy()
+
+    for col in df.columns:
+        series = df[col].dropna()
+
+        q1 = series.quantile(0.25)
+        q3 = series.quantile(0.75)
+        iqr = q3 - q1
+
+        lower_bound = q1 - IQR_multiplier * iqr
+        upper_bound = q3 + IQR_multiplier * iqr
+
+        df[col] = df[col].where(
+            (df[col] >= lower_bound) & (df[col] <= upper_bound),
+            np.nan
+        )
+
+    return df
+
+
 def mean_significance(df: pd.DataFrame) -> pd.DataFrame:
     mean = df.mean()
     _, p_v = stats.ttest_1samp(df, popmean=0, axis=0)
@@ -64,22 +85,6 @@ def correlations(df: pd.DataFrame, corr_type: str) -> tuple[pd.DataFrame, pd.Dat
             p_vals.loc[j, i] = p
 
     return corrs.astype(float), p_vals.astype(float)
-
-def corr_score(corrs: pd.DataFrame, pvals: pd.DataFrame) -> pd.Series:
-    """
-    Sums absolute significant correlations and returns a score for each asset.
-    :param corrs: pd.DataFrame
-    :param pvals: pd.DataFrame
-    :return: pd.Series
-    """
-    mask = pvals < 0.05
-    filtered_corrs = corrs.abs() * mask
-
-    arr = filtered_corrs.to_numpy(copy=True)
-    np.fill_diagonal(arr, 0)
-
-    score = arr.sum(axis=1)
-    return pd.Series(score, index=filtered_corrs.index).sort_values(ascending=False)
 
 
 def regression(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:

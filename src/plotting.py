@@ -31,7 +31,7 @@ plt.rcParams.update({
     "axes.spines.bottom": True,
 
     "legend.edgecolor": "none",
-    "legend.framealpha": 0,          # usuwa tło (clean look)
+    "legend.framealpha": 0,
     "legend.labelcolor": "#dddddd",
     })
 
@@ -59,9 +59,8 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
 
 def rolling_volatility_plot(df: pd.DataFrame, window: int) -> None:
     temp = df.rolling(window).var(ddof=0).pow(0.5)
-    #temp = temp.dropna()
 
-    ax = sns.lineplot(data=temp, dashes=False)
+    ax = sns.lineplot(data=temp, dashes=False, linewidth=0.7)
     ax.legend(loc='upper left', bbox_to_anchor=(0.9, 1))
     ymax = temp.max().max()
     xmin, xmax = ax.get_xlim()
@@ -136,10 +135,7 @@ def sma_change_plot(df: pd.DataFrame, symbols: list) -> None:
 
 def price_change_distributions(df: pd.DataFrame) -> None:
     sns.pairplot(df,
-                 kind="reg",
-                 plot_kws={
-                     "scatter_kws": {"s": 3, "alpha": 0.5, "color": "#2C6A8A"},
-                     "line_kws": {"color": "#F53A1C", "linewidth": 1}},
+                 plot_kws={"s": 3, "alpha": 0.5, "color": "#2C6A8A"},
                  diag_kws={"edgecolor":"none", "linewidth":0, "alpha":1, "color":"#2C6A8A"})
 
 

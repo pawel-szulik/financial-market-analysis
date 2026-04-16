@@ -2,6 +2,7 @@ import pandas as pd
 from pathlib import Path
 
 from src.config import NAMES
+from src.config import REVERSE_CURRENCY_PAIRS
 
 def data_prep_for_concat(extra_df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -16,10 +17,34 @@ def data_prep_for_concat(extra_df: pd.DataFrame) -> pd.DataFrame:
     symbol = extra_df["symbol"].iloc[0]
     df = extra_df.copy()
 
-    df = df.drop(columns=["change", "changePercent"])
+    df = df.drop(columns=["change", "changePercent", "symbol"])
     df = df.set_index("date")
 
     df.columns = pd.MultiIndex.from_product([df.columns, [symbol]])
+
+    return df
+
+
+def reverse_currency_pairs(df: pd.DataFrame, pairs: list[str]) -> pd.DataFrame:
+    df = df.copy()
+
+    new_columns = []
+
+    for col in df.columns:
+        field, symbol = col
+
+        if symbol in pairs:
+            df[col] = 1 / df[col]
+
+            base = symbol[:3]
+            quote = symbol[3:]
+            new_symbol = quote + base
+
+            new_columns.append((field, new_symbol))
+        else:
+            new_columns.append(col)
+
+    df.columns = pd.MultiIndex.from_tuples(new_columns)
 
     return df
 
@@ -78,7 +103,17 @@ class DataManager:
         if not dfs:
             raise ValueError(f"No data loaded")
 
-        self.raw_data = pd.concat(dfs, axis=1, join="outer").rename(columns=NAMES)
+        all_data = pd.concat(dfs, axis=1, join="outer")
+        all_data.columns = pd.MultiIndex.from_tuples([
+            (field, NAMES.get(symbol, symbol))
+            for field, symbol in all_data.columns
+        ])
+
+        print(all_data.dtypes)
+        all_data = reverse_currency_pairs(all_data, REVERSE_CURRENCY_PAIRS)
+
+        self.raw_data = all_data
+
         self.close_prices = self.raw_data["close"]
         self.open_prices = self.raw_data["open"]
 
