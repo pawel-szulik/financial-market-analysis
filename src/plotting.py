@@ -132,9 +132,19 @@ def sma_change_plot(df: pd.DataFrame, symbols: list) -> None:
         plt.show()
 
 def price_change_distributions(df: pd.DataFrame) -> None:
-    sns.pairplot(df,
-                 plot_kws={"s": 3, "alpha": 0.5, "color": "#2C6A8A"},
-                 diag_kws={"edgecolor":"none", "linewidth":0, "alpha":1, "color":"#2C6A8A"})
+    df = df.reset_index()
+    df_long = df.melt(id_vars=['date'],value_vars=["Bitcoin", "Gold", "Brent Crude Oil", "S&P 500", "EURO STOXX 50", "USDPLN"], var_name='asset', value_name='return_rate')
+    g=sns.displot(df_long,
+                x="return_rate",
+                bins=50,
+                col='asset',
+                col_wrap=3,
+                kind="hist",
+                edgecolor='none',
+                facet_kws={'sharex': False}
+                  )
+    g.set_titles("{col_name}")
+    g.set_axis_labels("Rate of return", "Count")
 
 
 def heatmap_corr(df: pd.DataFrame, highlight: list[str] = None) -> None:
