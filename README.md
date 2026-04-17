@@ -54,6 +54,8 @@ financial-market-analysis/
 │   ├── plotting.py
 │   └── __init__.py
 │
+├── .gitignore
+├── .gitattributes
 ├── README.md
 └── requirements.txt
 ```
