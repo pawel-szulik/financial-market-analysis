@@ -193,3 +193,6 @@ def highlight_significant(pvals: pd.DataFrame, lvl: float = 0.05):
             columns=df_values.columns
         )
     return styler
+
+def no_style(column):
+    return [None for _ in column]
