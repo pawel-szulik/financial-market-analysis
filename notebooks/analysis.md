@@ -53,13 +53,102 @@ In the first stage, the key descriptive statistics for daily price changes were 
 
 
 ```
-returns_sel.describe().style.apply(pl.no_style).format("{:.3f}").to_html()
+returns_sel.describe().style.apply(pl.no_style).format("{:.3f}")
 ```
 
 
 
 
-    '<style type="text/css">\n</style>\n<table id="T_cb3f1">\n  <thead>\n    <tr>\n      <th class="blank level0" >&nbsp;</th>\n      <th id="T_cb3f1_level0_col0" class="col_heading level0 col0" >Bitcoin</th>\n      <th id="T_cb3f1_level0_col1" class="col_heading level0 col1" >Gold</th>\n      <th id="T_cb3f1_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>\n      <th id="T_cb3f1_level0_col3" class="col_heading level0 col3" >S&P 500</th>\n      <th id="T_cb3f1_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>\n      <th id="T_cb3f1_level0_col5" class="col_heading level0 col5" >USDPLN</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th id="T_cb3f1_level0_row0" class="row_heading level0 row0" >count</th>\n      <td id="T_cb3f1_row0_col0" class="data row0 col0" >3069.000</td>\n      <td id="T_cb3f1_row0_col1" class="data row0 col1" >3069.000</td>\n      <td id="T_cb3f1_row0_col2" class="data row0 col2" >3069.000</td>\n      <td id="T_cb3f1_row0_col3" class="data row0 col3" >3069.000</td>\n      <td id="T_cb3f1_row0_col4" class="data row0 col4" >3069.000</td>\n      <td id="T_cb3f1_row0_col5" class="data row0 col5" >3069.000</td>\n    </tr>\n    <tr>\n      <th id="T_cb3f1_level0_row1" class="row_heading level0 row1" >mean</th>\n      <td id="T_cb3f1_row1_col0" class="data row1 col0" >0.523</td>\n      <td id="T_cb3f1_row1_col1" class="data row1 col1" >0.035</td>\n      <td id="T_cb3f1_row1_col2" class="data row1 col2" >0.093</td>\n      <td id="T_cb3f1_row1_col3" class="data row1 col3" >0.058</td>\n      <td id="T_cb3f1_row1_col4" class="data row1 col4" >0.051</td>\n      <td id="T_cb3f1_row1_col5" class="data row1 col5" >0.003</td>\n    </tr>\n    <tr>\n      <th id="T_cb3f1_level0_row2" class="row_heading level0 row2" >std</th>\n      <td id="T_cb3f1_row2_col0" class="data row2 col0" >5.818</td>\n      <td id="T_cb3f1_row2_col1" class="data row2 col1" >1.063</td>\n      <td id="T_cb3f1_row2_col2" class="data row2 col2" >2.170</td>\n      <td id="T_cb3f1_row2_col3" class="data row2 col3" >1.081</td>\n      <td id="T_cb3f1_row2_col4" class="data row2 col4" >1.238</td>\n      <td id="T_cb3f1_row2_col5" class="data row2 col5" >0.777</td>\n    </tr>\n    <tr>\n      <th id="T_cb3f1_level0_row3" class="row_heading level0 row3" >min</th>\n      <td id="T_cb3f1_row3_col0" class="data row3 col0" >-38.812</td>\n      <td id="T_cb3f1_row3_col1" class="data row3 col1" >-11.386</td>\n      <td id="T_cb3f1_row3_col2" class="data row3 col2" >-24.404</td>\n      <td id="T_cb3f1_row3_col3" class="data row3 col3" >-9.511</td>\n      <td id="T_cb3f1_row3_col4" class="data row3 col4" >-12.401</td>\n      <td id="T_cb3f1_row3_col5" class="data row3 col5" >-4.011</td>\n    </tr>\n    <tr>\n      <th id="T_cb3f1_level0_row4" class="row_heading level0 row4" >25%</th>\n      <td id="T_cb3f1_row4_col0" class="data row4 col0" >-1.473</td>\n      <td id="T_cb3f1_row4_col1" class="data row4 col1" >-0.472</td>\n      <td id="T_cb3f1_row4_col2" class="data row4 col2" >-1.010</td>\n      <td id="T_cb3f1_row4_col3" class="data row4 col3" >-0.382</td>\n      <td id="T_cb3f1_row4_col4" class="data row4 col4" >-0.571</td>\n      <td id="T_cb3f1_row4_col5" class="data row4 col5" >-0.447</td>\n    </tr>\n    <tr>\n      <th id="T_cb3f1_level0_row5" class="row_heading level0 row5" >50%</th>\n      <td id="T_cb3f1_row5_col0" class="data row5 col0" >0.146</td>\n      <td id="T_cb3f1_row5_col1" class="data row5 col1" >0.036</td>\n      <td id="T_cb3f1_row5_col2" class="data row5 col2" >0.135</td>\n      <td id="T_cb3f1_row5_col3" class="data row5 col3" >0.074</td>\n      <td id="T_cb3f1_row5_col4" class="data row5 col4" >0.069</td>\n      <td id="T_cb3f1_row5_col5" class="data row5 col5" >-0.008</td>\n    </tr>\n    <tr>\n      <th id="T_cb3f1_level0_row6" class="row_heading level0 row6" >75%</th>\n      <td id="T_cb3f1_row6_col0" class="data row6 col0" >2.149</td>\n      <td id="T_cb3f1_row6_col1" class="data row6 col1" >0.588</td>\n      <td id="T_cb3f1_row6_col2" class="data row6 col2" >1.147</td>\n      <td id="T_cb3f1_row6_col3" class="data row6 col3" >0.574</td>\n      <td id="T_cb3f1_row6_col4" class="data row6 col4" >0.673</td>\n      <td id="T_cb3f1_row6_col5" class="data row6 col5" >0.427</td>\n    </tr>\n    <tr>\n      <th id="T_cb3f1_level0_row7" class="row_heading level0 row7" >max</th>\n      <td id="T_cb3f1_row7_col0" class="data row7 col0" >123.881</td>\n      <td id="T_cb3f1_row7_col1" class="data row7 col1" >6.070</td>\n      <td id="T_cb3f1_row7_col2" class="data row7 col2" >21.019</td>\n      <td id="T_cb3f1_row7_col3" class="data row7 col3" >9.515</td>\n      <td id="T_cb3f1_row7_col4" class="data row7 col4" >9.236</td>\n      <td id="T_cb3f1_row7_col5" class="data row7 col5" >5.040</td>\n    </tr>\n  </tbody>\n</table>\n'
+<style type="text/css">
+</style>
+<table id="T_535e9">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_535e9_level0_col0" class="col_heading level0 col0" >Bitcoin</th>
+      <th id="T_535e9_level0_col1" class="col_heading level0 col1" >Gold</th>
+      <th id="T_535e9_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>
+      <th id="T_535e9_level0_col3" class="col_heading level0 col3" >S&P 500</th>
+      <th id="T_535e9_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>
+      <th id="T_535e9_level0_col5" class="col_heading level0 col5" >USDPLN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_535e9_level0_row0" class="row_heading level0 row0" >count</th>
+      <td id="T_535e9_row0_col0" class="data row0 col0" >3069.000</td>
+      <td id="T_535e9_row0_col1" class="data row0 col1" >3069.000</td>
+      <td id="T_535e9_row0_col2" class="data row0 col2" >3069.000</td>
+      <td id="T_535e9_row0_col3" class="data row0 col3" >3069.000</td>
+      <td id="T_535e9_row0_col4" class="data row0 col4" >3069.000</td>
+      <td id="T_535e9_row0_col5" class="data row0 col5" >3069.000</td>
+    </tr>
+    <tr>
+      <th id="T_535e9_level0_row1" class="row_heading level0 row1" >mean</th>
+      <td id="T_535e9_row1_col0" class="data row1 col0" >0.523</td>
+      <td id="T_535e9_row1_col1" class="data row1 col1" >0.035</td>
+      <td id="T_535e9_row1_col2" class="data row1 col2" >0.093</td>
+      <td id="T_535e9_row1_col3" class="data row1 col3" >0.058</td>
+      <td id="T_535e9_row1_col4" class="data row1 col4" >0.051</td>
+      <td id="T_535e9_row1_col5" class="data row1 col5" >0.003</td>
+    </tr>
+    <tr>
+      <th id="T_535e9_level0_row2" class="row_heading level0 row2" >std</th>
+      <td id="T_535e9_row2_col0" class="data row2 col0" >5.818</td>
+      <td id="T_535e9_row2_col1" class="data row2 col1" >1.063</td>
+      <td id="T_535e9_row2_col2" class="data row2 col2" >2.170</td>
+      <td id="T_535e9_row2_col3" class="data row2 col3" >1.081</td>
+      <td id="T_535e9_row2_col4" class="data row2 col4" >1.238</td>
+      <td id="T_535e9_row2_col5" class="data row2 col5" >0.777</td>
+    </tr>
+    <tr>
+      <th id="T_535e9_level0_row3" class="row_heading level0 row3" >min</th>
+      <td id="T_535e9_row3_col0" class="data row3 col0" >-38.812</td>
+      <td id="T_535e9_row3_col1" class="data row3 col1" >-11.386</td>
+      <td id="T_535e9_row3_col2" class="data row3 col2" >-24.404</td>
+      <td id="T_535e9_row3_col3" class="data row3 col3" >-9.511</td>
+      <td id="T_535e9_row3_col4" class="data row3 col4" >-12.401</td>
+      <td id="T_535e9_row3_col5" class="data row3 col5" >-4.011</td>
+    </tr>
+    <tr>
+      <th id="T_535e9_level0_row4" class="row_heading level0 row4" >25%</th>
+      <td id="T_535e9_row4_col0" class="data row4 col0" >-1.473</td>
+      <td id="T_535e9_row4_col1" class="data row4 col1" >-0.472</td>
+      <td id="T_535e9_row4_col2" class="data row4 col2" >-1.010</td>
+      <td id="T_535e9_row4_col3" class="data row4 col3" >-0.382</td>
+      <td id="T_535e9_row4_col4" class="data row4 col4" >-0.571</td>
+      <td id="T_535e9_row4_col5" class="data row4 col5" >-0.447</td>
+    </tr>
+    <tr>
+      <th id="T_535e9_level0_row5" class="row_heading level0 row5" >50%</th>
+      <td id="T_535e9_row5_col0" class="data row5 col0" >0.146</td>
+      <td id="T_535e9_row5_col1" class="data row5 col1" >0.036</td>
+      <td id="T_535e9_row5_col2" class="data row5 col2" >0.135</td>
+      <td id="T_535e9_row5_col3" class="data row5 col3" >0.074</td>
+      <td id="T_535e9_row5_col4" class="data row5 col4" >0.069</td>
+      <td id="T_535e9_row5_col5" class="data row5 col5" >-0.008</td>
+    </tr>
+    <tr>
+      <th id="T_535e9_level0_row6" class="row_heading level0 row6" >75%</th>
+      <td id="T_535e9_row6_col0" class="data row6 col0" >2.149</td>
+      <td id="T_535e9_row6_col1" class="data row6 col1" >0.588</td>
+      <td id="T_535e9_row6_col2" class="data row6 col2" >1.147</td>
+      <td id="T_535e9_row6_col3" class="data row6 col3" >0.574</td>
+      <td id="T_535e9_row6_col4" class="data row6 col4" >0.673</td>
+      <td id="T_535e9_row6_col5" class="data row6 col5" >0.427</td>
+    </tr>
+    <tr>
+      <th id="T_535e9_level0_row7" class="row_heading level0 row7" >max</th>
+      <td id="T_535e9_row7_col0" class="data row7 col0" >123.881</td>
+      <td id="T_535e9_row7_col1" class="data row7 col1" >6.070</td>
+      <td id="T_535e9_row7_col2" class="data row7 col2" >21.019</td>
+      <td id="T_535e9_row7_col3" class="data row7 col3" >9.515</td>
+      <td id="T_535e9_row7_col4" class="data row7 col4" >9.236</td>
+      <td id="T_535e9_row7_col5" class="data row7 col5" >5.040</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 
@@ -93,44 +182,44 @@ mean = aly.mean_significance(returns_sel)
 
 
 <style type="text/css">
-#T_5e78c_row0_col0, #T_5e78c_row2_col0, #T_5e78c_row3_col0, #T_5e78c_row4_col0 {
+#T_99a81_row0_col0, #T_99a81_row2_col0, #T_99a81_row3_col0, #T_99a81_row4_col0 {
   background-color: #8C4F4F;
 }
-#T_5e78c_row1_col0, #T_5e78c_row5_col0 {
+#T_99a81_row1_col0, #T_99a81_row5_col0 {
   background-color: #2B2B2B;
 }
 </style>
-<table id="T_5e78c">
+<table id="T_99a81">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_5e78c_level0_col0" class="col_heading level0 col0" >mean</th>
+      <th id="T_99a81_level0_col0" class="col_heading level0 col0" >mean</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_5e78c_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
-      <td id="T_5e78c_row0_col0" class="data row0 col0" >0.523298</td>
+      <th id="T_99a81_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
+      <td id="T_99a81_row0_col0" class="data row0 col0" >0.523298</td>
     </tr>
     <tr>
-      <th id="T_5e78c_level0_row1" class="row_heading level0 row1" >Gold</th>
-      <td id="T_5e78c_row1_col0" class="data row1 col0" >0.035204</td>
+      <th id="T_99a81_level0_row1" class="row_heading level0 row1" >Gold</th>
+      <td id="T_99a81_row1_col0" class="data row1 col0" >0.035204</td>
     </tr>
     <tr>
-      <th id="T_5e78c_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
-      <td id="T_5e78c_row2_col0" class="data row2 col0" >0.092660</td>
+      <th id="T_99a81_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
+      <td id="T_99a81_row2_col0" class="data row2 col0" >0.092660</td>
     </tr>
     <tr>
-      <th id="T_5e78c_level0_row3" class="row_heading level0 row3" >S&P 500</th>
-      <td id="T_5e78c_row3_col0" class="data row3 col0" >0.058010</td>
+      <th id="T_99a81_level0_row3" class="row_heading level0 row3" >S&P 500</th>
+      <td id="T_99a81_row3_col0" class="data row3 col0" >0.058010</td>
     </tr>
     <tr>
-      <th id="T_5e78c_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
-      <td id="T_5e78c_row4_col0" class="data row4 col0" >0.050536</td>
+      <th id="T_99a81_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
+      <td id="T_99a81_row4_col0" class="data row4 col0" >0.050536</td>
     </tr>
     <tr>
-      <th id="T_5e78c_level0_row5" class="row_heading level0 row5" >USDPLN</th>
-      <td id="T_5e78c_row5_col0" class="data row5 col0" >0.003177</td>
+      <th id="T_99a81_level0_row5" class="row_heading level0 row5" >USDPLN</th>
+      <td id="T_99a81_row5_col0" class="data row5 col0" >0.003177</td>
     </tr>
   </tbody>
 </table>
@@ -152,44 +241,44 @@ win_r = aly.sign_test(returns_sel, alternative='greater')
 
 
 <style type="text/css">
-#T_1b946_row0_col0, #T_1b946_row2_col0, #T_1b946_row3_col0, #T_1b946_row4_col0 {
+#T_facd0_row0_col0, #T_facd0_row2_col0, #T_facd0_row3_col0, #T_facd0_row4_col0 {
   background-color: #8C4F4F;
 }
-#T_1b946_row1_col0, #T_1b946_row5_col0 {
+#T_facd0_row1_col0, #T_facd0_row5_col0 {
   background-color: #2B2B2B;
 }
 </style>
-<table id="T_1b946">
+<table id="T_facd0">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_1b946_level0_col0" class="col_heading level0 col0" >win_rate</th>
+      <th id="T_facd0_level0_col0" class="col_heading level0 col0" >win_rate</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_1b946_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
-      <td id="T_1b946_row0_col0" class="data row0 col0" >52.297165</td>
+      <th id="T_facd0_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
+      <td id="T_facd0_row0_col0" class="data row0 col0" >52.297165</td>
     </tr>
     <tr>
-      <th id="T_1b946_level0_row1" class="row_heading level0 row1" >Gold</th>
-      <td id="T_1b946_row1_col0" class="data row1 col0" >52.557836</td>
+      <th id="T_facd0_level0_row1" class="row_heading level0 row1" >Gold</th>
+      <td id="T_facd0_row1_col0" class="data row1 col0" >52.557836</td>
     </tr>
     <tr>
-      <th id="T_1b946_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
-      <td id="T_1b946_row2_col0" class="data row2 col0" >53.144347</td>
+      <th id="T_facd0_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
+      <td id="T_facd0_row2_col0" class="data row2 col0" >53.144347</td>
     </tr>
     <tr>
-      <th id="T_1b946_level0_row3" class="row_heading level0 row3" >S&P 500</th>
-      <td id="T_1b946_row3_col0" class="data row3 col0" >54.838710</td>
+      <th id="T_facd0_level0_row3" class="row_heading level0 row3" >S&P 500</th>
+      <td id="T_facd0_row3_col0" class="data row3 col0" >54.838710</td>
     </tr>
     <tr>
-      <th id="T_1b946_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
-      <td id="T_1b946_row4_col0" class="data row4 col0" >53.372434</td>
+      <th id="T_facd0_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
+      <td id="T_facd0_row4_col0" class="data row4 col0" >53.372434</td>
     </tr>
     <tr>
-      <th id="T_1b946_level0_row5" class="row_heading level0 row5" >USDPLN</th>
-      <td id="T_1b946_row5_col0" class="data row5 col0" >49.527533</td>
+      <th id="T_facd0_level0_row5" class="row_heading level0 row5" >USDPLN</th>
+      <td id="T_facd0_row5_col0" class="data row5 col0" >49.527533</td>
     </tr>
   </tbody>
 </table>
@@ -281,79 +370,79 @@ spear_cor, spear_p_vals = aly.correlations(returns_sel, "spearman")
 
 
 <style type="text/css">
-#T_bc948_row0_col0, #T_bc948_row0_col1, #T_bc948_row0_col2, #T_bc948_row0_col3, #T_bc948_row0_col4, #T_bc948_row0_col5, #T_bc948_row1_col0, #T_bc948_row1_col1, #T_bc948_row1_col2, #T_bc948_row1_col3, #T_bc948_row1_col5, #T_bc948_row2_col0, #T_bc948_row2_col1, #T_bc948_row2_col2, #T_bc948_row2_col3, #T_bc948_row2_col4, #T_bc948_row2_col5, #T_bc948_row3_col0, #T_bc948_row3_col1, #T_bc948_row3_col2, #T_bc948_row3_col3, #T_bc948_row3_col4, #T_bc948_row3_col5, #T_bc948_row4_col0, #T_bc948_row4_col2, #T_bc948_row4_col3, #T_bc948_row4_col4, #T_bc948_row4_col5, #T_bc948_row5_col0, #T_bc948_row5_col1, #T_bc948_row5_col2, #T_bc948_row5_col3, #T_bc948_row5_col4, #T_bc948_row5_col5 {
+#T_73bcc_row0_col0, #T_73bcc_row0_col1, #T_73bcc_row0_col2, #T_73bcc_row0_col3, #T_73bcc_row0_col4, #T_73bcc_row0_col5, #T_73bcc_row1_col0, #T_73bcc_row1_col1, #T_73bcc_row1_col2, #T_73bcc_row1_col3, #T_73bcc_row1_col5, #T_73bcc_row2_col0, #T_73bcc_row2_col1, #T_73bcc_row2_col2, #T_73bcc_row2_col3, #T_73bcc_row2_col4, #T_73bcc_row2_col5, #T_73bcc_row3_col0, #T_73bcc_row3_col1, #T_73bcc_row3_col2, #T_73bcc_row3_col3, #T_73bcc_row3_col4, #T_73bcc_row3_col5, #T_73bcc_row4_col0, #T_73bcc_row4_col2, #T_73bcc_row4_col3, #T_73bcc_row4_col4, #T_73bcc_row4_col5, #T_73bcc_row5_col0, #T_73bcc_row5_col1, #T_73bcc_row5_col2, #T_73bcc_row5_col3, #T_73bcc_row5_col4, #T_73bcc_row5_col5 {
   background-color: #8C4F4F;
 }
-#T_bc948_row1_col4, #T_bc948_row4_col1 {
+#T_73bcc_row1_col4, #T_73bcc_row4_col1 {
   background-color: #2B2B2B;
 }
 </style>
-<table id="T_bc948">
+<table id="T_73bcc">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_bc948_level0_col0" class="col_heading level0 col0" >Bitcoin</th>
-      <th id="T_bc948_level0_col1" class="col_heading level0 col1" >Gold</th>
-      <th id="T_bc948_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>
-      <th id="T_bc948_level0_col3" class="col_heading level0 col3" >S&P 500</th>
-      <th id="T_bc948_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>
-      <th id="T_bc948_level0_col5" class="col_heading level0 col5" >USDPLN</th>
+      <th id="T_73bcc_level0_col0" class="col_heading level0 col0" >Bitcoin</th>
+      <th id="T_73bcc_level0_col1" class="col_heading level0 col1" >Gold</th>
+      <th id="T_73bcc_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>
+      <th id="T_73bcc_level0_col3" class="col_heading level0 col3" >S&P 500</th>
+      <th id="T_73bcc_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>
+      <th id="T_73bcc_level0_col5" class="col_heading level0 col5" >USDPLN</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_bc948_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
-      <td id="T_bc948_row0_col0" class="data row0 col0" >1.000</td>
-      <td id="T_bc948_row0_col1" class="data row0 col1" >0.062</td>
-      <td id="T_bc948_row0_col2" class="data row0 col2" >0.044</td>
-      <td id="T_bc948_row0_col3" class="data row0 col3" >0.144</td>
-      <td id="T_bc948_row0_col4" class="data row0 col4" >0.077</td>
-      <td id="T_bc948_row0_col5" class="data row0 col5" >-0.082</td>
+      <th id="T_73bcc_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
+      <td id="T_73bcc_row0_col0" class="data row0 col0" >1.000</td>
+      <td id="T_73bcc_row0_col1" class="data row0 col1" >0.062</td>
+      <td id="T_73bcc_row0_col2" class="data row0 col2" >0.044</td>
+      <td id="T_73bcc_row0_col3" class="data row0 col3" >0.144</td>
+      <td id="T_73bcc_row0_col4" class="data row0 col4" >0.077</td>
+      <td id="T_73bcc_row0_col5" class="data row0 col5" >-0.082</td>
     </tr>
     <tr>
-      <th id="T_bc948_level0_row1" class="row_heading level0 row1" >Gold</th>
-      <td id="T_bc948_row1_col0" class="data row1 col0" >0.062</td>
-      <td id="T_bc948_row1_col1" class="data row1 col1" >1.000</td>
-      <td id="T_bc948_row1_col2" class="data row1 col2" >0.130</td>
-      <td id="T_bc948_row1_col3" class="data row1 col3" >0.043</td>
-      <td id="T_bc948_row1_col4" class="data row1 col4" >0.004</td>
-      <td id="T_bc948_row1_col5" class="data row1 col5" >-0.304</td>
+      <th id="T_73bcc_level0_row1" class="row_heading level0 row1" >Gold</th>
+      <td id="T_73bcc_row1_col0" class="data row1 col0" >0.062</td>
+      <td id="T_73bcc_row1_col1" class="data row1 col1" >1.000</td>
+      <td id="T_73bcc_row1_col2" class="data row1 col2" >0.130</td>
+      <td id="T_73bcc_row1_col3" class="data row1 col3" >0.043</td>
+      <td id="T_73bcc_row1_col4" class="data row1 col4" >0.004</td>
+      <td id="T_73bcc_row1_col5" class="data row1 col5" >-0.304</td>
     </tr>
     <tr>
-      <th id="T_bc948_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
-      <td id="T_bc948_row2_col0" class="data row2 col0" >0.044</td>
-      <td id="T_bc948_row2_col1" class="data row2 col1" >0.130</td>
-      <td id="T_bc948_row2_col2" class="data row2 col2" >1.000</td>
-      <td id="T_bc948_row2_col3" class="data row2 col3" >0.261</td>
-      <td id="T_bc948_row2_col4" class="data row2 col4" >0.229</td>
-      <td id="T_bc948_row2_col5" class="data row2 col5" >-0.149</td>
+      <th id="T_73bcc_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
+      <td id="T_73bcc_row2_col0" class="data row2 col0" >0.044</td>
+      <td id="T_73bcc_row2_col1" class="data row2 col1" >0.130</td>
+      <td id="T_73bcc_row2_col2" class="data row2 col2" >1.000</td>
+      <td id="T_73bcc_row2_col3" class="data row2 col3" >0.261</td>
+      <td id="T_73bcc_row2_col4" class="data row2 col4" >0.229</td>
+      <td id="T_73bcc_row2_col5" class="data row2 col5" >-0.149</td>
     </tr>
     <tr>
-      <th id="T_bc948_level0_row3" class="row_heading level0 row3" >S&P 500</th>
-      <td id="T_bc948_row3_col0" class="data row3 col0" >0.144</td>
-      <td id="T_bc948_row3_col1" class="data row3 col1" >0.043</td>
-      <td id="T_bc948_row3_col2" class="data row3 col2" >0.261</td>
-      <td id="T_bc948_row3_col3" class="data row3 col3" >1.000</td>
-      <td id="T_bc948_row3_col4" class="data row3 col4" >0.547</td>
-      <td id="T_bc948_row3_col5" class="data row3 col5" >-0.318</td>
+      <th id="T_73bcc_level0_row3" class="row_heading level0 row3" >S&P 500</th>
+      <td id="T_73bcc_row3_col0" class="data row3 col0" >0.144</td>
+      <td id="T_73bcc_row3_col1" class="data row3 col1" >0.043</td>
+      <td id="T_73bcc_row3_col2" class="data row3 col2" >0.261</td>
+      <td id="T_73bcc_row3_col3" class="data row3 col3" >1.000</td>
+      <td id="T_73bcc_row3_col4" class="data row3 col4" >0.547</td>
+      <td id="T_73bcc_row3_col5" class="data row3 col5" >-0.318</td>
     </tr>
     <tr>
-      <th id="T_bc948_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
-      <td id="T_bc948_row4_col0" class="data row4 col0" >0.077</td>
-      <td id="T_bc948_row4_col1" class="data row4 col1" >0.004</td>
-      <td id="T_bc948_row4_col2" class="data row4 col2" >0.229</td>
-      <td id="T_bc948_row4_col3" class="data row4 col3" >0.547</td>
-      <td id="T_bc948_row4_col4" class="data row4 col4" >1.000</td>
-      <td id="T_bc948_row4_col5" class="data row4 col5" >-0.201</td>
+      <th id="T_73bcc_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
+      <td id="T_73bcc_row4_col0" class="data row4 col0" >0.077</td>
+      <td id="T_73bcc_row4_col1" class="data row4 col1" >0.004</td>
+      <td id="T_73bcc_row4_col2" class="data row4 col2" >0.229</td>
+      <td id="T_73bcc_row4_col3" class="data row4 col3" >0.547</td>
+      <td id="T_73bcc_row4_col4" class="data row4 col4" >1.000</td>
+      <td id="T_73bcc_row4_col5" class="data row4 col5" >-0.201</td>
     </tr>
     <tr>
-      <th id="T_bc948_level0_row5" class="row_heading level0 row5" >USDPLN</th>
-      <td id="T_bc948_row5_col0" class="data row5 col0" >-0.082</td>
-      <td id="T_bc948_row5_col1" class="data row5 col1" >-0.304</td>
-      <td id="T_bc948_row5_col2" class="data row5 col2" >-0.149</td>
-      <td id="T_bc948_row5_col3" class="data row5 col3" >-0.318</td>
-      <td id="T_bc948_row5_col4" class="data row5 col4" >-0.201</td>
-      <td id="T_bc948_row5_col5" class="data row5 col5" >1.000</td>
+      <th id="T_73bcc_level0_row5" class="row_heading level0 row5" >USDPLN</th>
+      <td id="T_73bcc_row5_col0" class="data row5 col0" >-0.082</td>
+      <td id="T_73bcc_row5_col1" class="data row5 col1" >-0.304</td>
+      <td id="T_73bcc_row5_col2" class="data row5 col2" >-0.149</td>
+      <td id="T_73bcc_row5_col3" class="data row5 col3" >-0.318</td>
+      <td id="T_73bcc_row5_col4" class="data row5 col4" >-0.201</td>
+      <td id="T_73bcc_row5_col5" class="data row5 col5" >1.000</td>
     </tr>
   </tbody>
 </table>
@@ -375,79 +464,79 @@ pear_cor, pear_p_vals = aly.correlations(returns_sel, "pearson")
 
 
 <style type="text/css">
-#T_ba92a_row0_col0, #T_ba92a_row0_col3, #T_ba92a_row0_col4, #T_ba92a_row0_col5, #T_ba92a_row1_col1, #T_ba92a_row1_col2, #T_ba92a_row1_col3, #T_ba92a_row1_col5, #T_ba92a_row2_col1, #T_ba92a_row2_col2, #T_ba92a_row2_col3, #T_ba92a_row2_col4, #T_ba92a_row2_col5, #T_ba92a_row3_col0, #T_ba92a_row3_col1, #T_ba92a_row3_col2, #T_ba92a_row3_col3, #T_ba92a_row3_col4, #T_ba92a_row3_col5, #T_ba92a_row4_col0, #T_ba92a_row4_col2, #T_ba92a_row4_col3, #T_ba92a_row4_col4, #T_ba92a_row4_col5, #T_ba92a_row5_col0, #T_ba92a_row5_col1, #T_ba92a_row5_col2, #T_ba92a_row5_col3, #T_ba92a_row5_col4, #T_ba92a_row5_col5 {
+#T_8db22_row0_col0, #T_8db22_row0_col3, #T_8db22_row0_col4, #T_8db22_row0_col5, #T_8db22_row1_col1, #T_8db22_row1_col2, #T_8db22_row1_col3, #T_8db22_row1_col5, #T_8db22_row2_col1, #T_8db22_row2_col2, #T_8db22_row2_col3, #T_8db22_row2_col4, #T_8db22_row2_col5, #T_8db22_row3_col0, #T_8db22_row3_col1, #T_8db22_row3_col2, #T_8db22_row3_col3, #T_8db22_row3_col4, #T_8db22_row3_col5, #T_8db22_row4_col0, #T_8db22_row4_col2, #T_8db22_row4_col3, #T_8db22_row4_col4, #T_8db22_row4_col5, #T_8db22_row5_col0, #T_8db22_row5_col1, #T_8db22_row5_col2, #T_8db22_row5_col3, #T_8db22_row5_col4, #T_8db22_row5_col5 {
   background-color: #8C4F4F;
 }
-#T_ba92a_row0_col1, #T_ba92a_row0_col2, #T_ba92a_row1_col0, #T_ba92a_row1_col4, #T_ba92a_row2_col0, #T_ba92a_row4_col1 {
+#T_8db22_row0_col1, #T_8db22_row0_col2, #T_8db22_row1_col0, #T_8db22_row1_col4, #T_8db22_row2_col0, #T_8db22_row4_col1 {
   background-color: #2B2B2B;
 }
 </style>
-<table id="T_ba92a">
+<table id="T_8db22">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_ba92a_level0_col0" class="col_heading level0 col0" >Bitcoin</th>
-      <th id="T_ba92a_level0_col1" class="col_heading level0 col1" >Gold</th>
-      <th id="T_ba92a_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>
-      <th id="T_ba92a_level0_col3" class="col_heading level0 col3" >S&P 500</th>
-      <th id="T_ba92a_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>
-      <th id="T_ba92a_level0_col5" class="col_heading level0 col5" >USDPLN</th>
+      <th id="T_8db22_level0_col0" class="col_heading level0 col0" >Bitcoin</th>
+      <th id="T_8db22_level0_col1" class="col_heading level0 col1" >Gold</th>
+      <th id="T_8db22_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>
+      <th id="T_8db22_level0_col3" class="col_heading level0 col3" >S&P 500</th>
+      <th id="T_8db22_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>
+      <th id="T_8db22_level0_col5" class="col_heading level0 col5" >USDPLN</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_ba92a_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
-      <td id="T_ba92a_row0_col0" class="data row0 col0" >1.000</td>
-      <td id="T_ba92a_row0_col1" class="data row0 col1" >0.028</td>
-      <td id="T_ba92a_row0_col2" class="data row0 col2" >0.028</td>
-      <td id="T_ba92a_row0_col3" class="data row0 col3" >0.121</td>
-      <td id="T_ba92a_row0_col4" class="data row0 col4" >0.056</td>
-      <td id="T_ba92a_row0_col5" class="data row0 col5" >-0.049</td>
+      <th id="T_8db22_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
+      <td id="T_8db22_row0_col0" class="data row0 col0" >1.000</td>
+      <td id="T_8db22_row0_col1" class="data row0 col1" >0.028</td>
+      <td id="T_8db22_row0_col2" class="data row0 col2" >0.028</td>
+      <td id="T_8db22_row0_col3" class="data row0 col3" >0.121</td>
+      <td id="T_8db22_row0_col4" class="data row0 col4" >0.056</td>
+      <td id="T_8db22_row0_col5" class="data row0 col5" >-0.049</td>
     </tr>
     <tr>
-      <th id="T_ba92a_level0_row1" class="row_heading level0 row1" >Gold</th>
-      <td id="T_ba92a_row1_col0" class="data row1 col0" >0.028</td>
-      <td id="T_ba92a_row1_col1" class="data row1 col1" >1.000</td>
-      <td id="T_ba92a_row1_col2" class="data row1 col2" >0.140</td>
-      <td id="T_ba92a_row1_col3" class="data row1 col3" >0.070</td>
-      <td id="T_ba92a_row1_col4" class="data row1 col4" >0.027</td>
-      <td id="T_ba92a_row1_col5" class="data row1 col5" >-0.246</td>
+      <th id="T_8db22_level0_row1" class="row_heading level0 row1" >Gold</th>
+      <td id="T_8db22_row1_col0" class="data row1 col0" >0.028</td>
+      <td id="T_8db22_row1_col1" class="data row1 col1" >1.000</td>
+      <td id="T_8db22_row1_col2" class="data row1 col2" >0.140</td>
+      <td id="T_8db22_row1_col3" class="data row1 col3" >0.070</td>
+      <td id="T_8db22_row1_col4" class="data row1 col4" >0.027</td>
+      <td id="T_8db22_row1_col5" class="data row1 col5" >-0.246</td>
     </tr>
     <tr>
-      <th id="T_ba92a_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
-      <td id="T_ba92a_row2_col0" class="data row2 col0" >0.028</td>
-      <td id="T_ba92a_row2_col1" class="data row2 col1" >0.140</td>
-      <td id="T_ba92a_row2_col2" class="data row2 col2" >1.000</td>
-      <td id="T_ba92a_row2_col3" class="data row2 col3" >0.287</td>
-      <td id="T_ba92a_row2_col4" class="data row2 col4" >0.242</td>
-      <td id="T_ba92a_row2_col5" class="data row2 col5" >-0.133</td>
+      <th id="T_8db22_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
+      <td id="T_8db22_row2_col0" class="data row2 col0" >0.028</td>
+      <td id="T_8db22_row2_col1" class="data row2 col1" >0.140</td>
+      <td id="T_8db22_row2_col2" class="data row2 col2" >1.000</td>
+      <td id="T_8db22_row2_col3" class="data row2 col3" >0.287</td>
+      <td id="T_8db22_row2_col4" class="data row2 col4" >0.242</td>
+      <td id="T_8db22_row2_col5" class="data row2 col5" >-0.133</td>
     </tr>
     <tr>
-      <th id="T_ba92a_level0_row3" class="row_heading level0 row3" >S&P 500</th>
-      <td id="T_ba92a_row3_col0" class="data row3 col0" >0.121</td>
-      <td id="T_ba92a_row3_col1" class="data row3 col1" >0.070</td>
-      <td id="T_ba92a_row3_col2" class="data row3 col2" >0.287</td>
-      <td id="T_ba92a_row3_col3" class="data row3 col3" >1.000</td>
-      <td id="T_ba92a_row3_col4" class="data row3 col4" >0.578</td>
-      <td id="T_ba92a_row3_col5" class="data row3 col5" >-0.366</td>
+      <th id="T_8db22_level0_row3" class="row_heading level0 row3" >S&P 500</th>
+      <td id="T_8db22_row3_col0" class="data row3 col0" >0.121</td>
+      <td id="T_8db22_row3_col1" class="data row3 col1" >0.070</td>
+      <td id="T_8db22_row3_col2" class="data row3 col2" >0.287</td>
+      <td id="T_8db22_row3_col3" class="data row3 col3" >1.000</td>
+      <td id="T_8db22_row3_col4" class="data row3 col4" >0.578</td>
+      <td id="T_8db22_row3_col5" class="data row3 col5" >-0.366</td>
     </tr>
     <tr>
-      <th id="T_ba92a_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
-      <td id="T_ba92a_row4_col0" class="data row4 col0" >0.056</td>
-      <td id="T_ba92a_row4_col1" class="data row4 col1" >0.027</td>
-      <td id="T_ba92a_row4_col2" class="data row4 col2" >0.242</td>
-      <td id="T_ba92a_row4_col3" class="data row4 col3" >0.578</td>
-      <td id="T_ba92a_row4_col4" class="data row4 col4" >1.000</td>
-      <td id="T_ba92a_row4_col5" class="data row4 col5" >-0.301</td>
+      <th id="T_8db22_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
+      <td id="T_8db22_row4_col0" class="data row4 col0" >0.056</td>
+      <td id="T_8db22_row4_col1" class="data row4 col1" >0.027</td>
+      <td id="T_8db22_row4_col2" class="data row4 col2" >0.242</td>
+      <td id="T_8db22_row4_col3" class="data row4 col3" >0.578</td>
+      <td id="T_8db22_row4_col4" class="data row4 col4" >1.000</td>
+      <td id="T_8db22_row4_col5" class="data row4 col5" >-0.301</td>
     </tr>
     <tr>
-      <th id="T_ba92a_level0_row5" class="row_heading level0 row5" >USDPLN</th>
-      <td id="T_ba92a_row5_col0" class="data row5 col0" >-0.049</td>
-      <td id="T_ba92a_row5_col1" class="data row5 col1" >-0.246</td>
-      <td id="T_ba92a_row5_col2" class="data row5 col2" >-0.133</td>
-      <td id="T_ba92a_row5_col3" class="data row5 col3" >-0.366</td>
-      <td id="T_ba92a_row5_col4" class="data row5 col4" >-0.301</td>
-      <td id="T_ba92a_row5_col5" class="data row5 col5" >1.000</td>
+      <th id="T_8db22_level0_row5" class="row_heading level0 row5" >USDPLN</th>
+      <td id="T_8db22_row5_col0" class="data row5 col0" >-0.049</td>
+      <td id="T_8db22_row5_col1" class="data row5 col1" >-0.246</td>
+      <td id="T_8db22_row5_col2" class="data row5 col2" >-0.133</td>
+      <td id="T_8db22_row5_col3" class="data row5 col3" >-0.366</td>
+      <td id="T_8db22_row5_col4" class="data row5 col4" >-0.301</td>
+      <td id="T_8db22_row5_col5" class="data row5 col5" >1.000</td>
     </tr>
   </tbody>
 </table>
@@ -470,79 +559,79 @@ reg, reg_pvals = aly.regression(returns_sel)
 
 
 <style type="text/css">
-#T_df0e5_row0_col0, #T_df0e5_row0_col3, #T_df0e5_row0_col4, #T_df0e5_row0_col5, #T_df0e5_row1_col1, #T_df0e5_row1_col2, #T_df0e5_row1_col3, #T_df0e5_row1_col5, #T_df0e5_row2_col1, #T_df0e5_row2_col2, #T_df0e5_row2_col3, #T_df0e5_row2_col4, #T_df0e5_row2_col5, #T_df0e5_row3_col0, #T_df0e5_row3_col1, #T_df0e5_row3_col2, #T_df0e5_row3_col3, #T_df0e5_row3_col4, #T_df0e5_row3_col5, #T_df0e5_row4_col0, #T_df0e5_row4_col2, #T_df0e5_row4_col3, #T_df0e5_row4_col4, #T_df0e5_row4_col5, #T_df0e5_row5_col0, #T_df0e5_row5_col1, #T_df0e5_row5_col2, #T_df0e5_row5_col3, #T_df0e5_row5_col4, #T_df0e5_row5_col5 {
+#T_37e48_row0_col0, #T_37e48_row0_col3, #T_37e48_row0_col4, #T_37e48_row0_col5, #T_37e48_row1_col1, #T_37e48_row1_col2, #T_37e48_row1_col3, #T_37e48_row1_col5, #T_37e48_row2_col1, #T_37e48_row2_col2, #T_37e48_row2_col3, #T_37e48_row2_col4, #T_37e48_row2_col5, #T_37e48_row3_col0, #T_37e48_row3_col1, #T_37e48_row3_col2, #T_37e48_row3_col3, #T_37e48_row3_col4, #T_37e48_row3_col5, #T_37e48_row4_col0, #T_37e48_row4_col2, #T_37e48_row4_col3, #T_37e48_row4_col4, #T_37e48_row4_col5, #T_37e48_row5_col0, #T_37e48_row5_col1, #T_37e48_row5_col2, #T_37e48_row5_col3, #T_37e48_row5_col4, #T_37e48_row5_col5 {
   background-color: #8C4F4F;
 }
-#T_df0e5_row0_col1, #T_df0e5_row0_col2, #T_df0e5_row1_col0, #T_df0e5_row1_col4, #T_df0e5_row2_col0, #T_df0e5_row4_col1 {
+#T_37e48_row0_col1, #T_37e48_row0_col2, #T_37e48_row1_col0, #T_37e48_row1_col4, #T_37e48_row2_col0, #T_37e48_row4_col1 {
   background-color: #2B2B2B;
 }
 </style>
-<table id="T_df0e5">
+<table id="T_37e48">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_df0e5_level0_col0" class="col_heading level0 col0" >Bitcoin</th>
-      <th id="T_df0e5_level0_col1" class="col_heading level0 col1" >Gold</th>
-      <th id="T_df0e5_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>
-      <th id="T_df0e5_level0_col3" class="col_heading level0 col3" >S&P 500</th>
-      <th id="T_df0e5_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>
-      <th id="T_df0e5_level0_col5" class="col_heading level0 col5" >USDPLN</th>
+      <th id="T_37e48_level0_col0" class="col_heading level0 col0" >Bitcoin</th>
+      <th id="T_37e48_level0_col1" class="col_heading level0 col1" >Gold</th>
+      <th id="T_37e48_level0_col2" class="col_heading level0 col2" >Brent Crude Oil</th>
+      <th id="T_37e48_level0_col3" class="col_heading level0 col3" >S&P 500</th>
+      <th id="T_37e48_level0_col4" class="col_heading level0 col4" >EURO STOXX 50</th>
+      <th id="T_37e48_level0_col5" class="col_heading level0 col5" >USDPLN</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_df0e5_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
-      <td id="T_df0e5_row0_col0" class="data row0 col0" >1.000</td>
-      <td id="T_df0e5_row0_col1" class="data row0 col1" >0.005</td>
-      <td id="T_df0e5_row0_col2" class="data row0 col2" >0.010</td>
-      <td id="T_df0e5_row0_col3" class="data row0 col3" >0.022</td>
-      <td id="T_df0e5_row0_col4" class="data row0 col4" >0.012</td>
-      <td id="T_df0e5_row0_col5" class="data row0 col5" >-0.007</td>
+      <th id="T_37e48_level0_row0" class="row_heading level0 row0" >Bitcoin</th>
+      <td id="T_37e48_row0_col0" class="data row0 col0" >1.000</td>
+      <td id="T_37e48_row0_col1" class="data row0 col1" >0.005</td>
+      <td id="T_37e48_row0_col2" class="data row0 col2" >0.010</td>
+      <td id="T_37e48_row0_col3" class="data row0 col3" >0.022</td>
+      <td id="T_37e48_row0_col4" class="data row0 col4" >0.012</td>
+      <td id="T_37e48_row0_col5" class="data row0 col5" >-0.007</td>
     </tr>
     <tr>
-      <th id="T_df0e5_level0_row1" class="row_heading level0 row1" >Gold</th>
-      <td id="T_df0e5_row1_col0" class="data row1 col0" >0.152</td>
-      <td id="T_df0e5_row1_col1" class="data row1 col1" >1.000</td>
-      <td id="T_df0e5_row1_col2" class="data row1 col2" >0.286</td>
-      <td id="T_df0e5_row1_col3" class="data row1 col3" >0.071</td>
-      <td id="T_df0e5_row1_col4" class="data row1 col4" >0.032</td>
-      <td id="T_df0e5_row1_col5" class="data row1 col5" >-0.180</td>
+      <th id="T_37e48_level0_row1" class="row_heading level0 row1" >Gold</th>
+      <td id="T_37e48_row1_col0" class="data row1 col0" >0.152</td>
+      <td id="T_37e48_row1_col1" class="data row1 col1" >1.000</td>
+      <td id="T_37e48_row1_col2" class="data row1 col2" >0.286</td>
+      <td id="T_37e48_row1_col3" class="data row1 col3" >0.071</td>
+      <td id="T_37e48_row1_col4" class="data row1 col4" >0.032</td>
+      <td id="T_37e48_row1_col5" class="data row1 col5" >-0.180</td>
     </tr>
     <tr>
-      <th id="T_df0e5_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
-      <td id="T_df0e5_row2_col0" class="data row2 col0" >0.074</td>
-      <td id="T_df0e5_row2_col1" class="data row2 col1" >0.069</td>
-      <td id="T_df0e5_row2_col2" class="data row2 col2" >1.000</td>
-      <td id="T_df0e5_row2_col3" class="data row2 col3" >0.143</td>
-      <td id="T_df0e5_row2_col4" class="data row2 col4" >0.138</td>
-      <td id="T_df0e5_row2_col5" class="data row2 col5" >-0.048</td>
+      <th id="T_37e48_level0_row2" class="row_heading level0 row2" >Brent Crude Oil</th>
+      <td id="T_37e48_row2_col0" class="data row2 col0" >0.074</td>
+      <td id="T_37e48_row2_col1" class="data row2 col1" >0.069</td>
+      <td id="T_37e48_row2_col2" class="data row2 col2" >1.000</td>
+      <td id="T_37e48_row2_col3" class="data row2 col3" >0.143</td>
+      <td id="T_37e48_row2_col4" class="data row2 col4" >0.138</td>
+      <td id="T_37e48_row2_col5" class="data row2 col5" >-0.048</td>
     </tr>
     <tr>
-      <th id="T_df0e5_level0_row3" class="row_heading level0 row3" >S&P 500</th>
-      <td id="T_df0e5_row3_col0" class="data row3 col0" >0.649</td>
-      <td id="T_df0e5_row3_col1" class="data row3 col1" >0.069</td>
-      <td id="T_df0e5_row3_col2" class="data row3 col2" >0.576</td>
-      <td id="T_df0e5_row3_col3" class="data row3 col3" >1.000</td>
-      <td id="T_df0e5_row3_col4" class="data row3 col4" >0.662</td>
-      <td id="T_df0e5_row3_col5" class="data row3 col5" >-0.263</td>
+      <th id="T_37e48_level0_row3" class="row_heading level0 row3" >S&P 500</th>
+      <td id="T_37e48_row3_col0" class="data row3 col0" >0.649</td>
+      <td id="T_37e48_row3_col1" class="data row3 col1" >0.069</td>
+      <td id="T_37e48_row3_col2" class="data row3 col2" >0.576</td>
+      <td id="T_37e48_row3_col3" class="data row3 col3" >1.000</td>
+      <td id="T_37e48_row3_col4" class="data row3 col4" >0.662</td>
+      <td id="T_37e48_row3_col5" class="data row3 col5" >-0.263</td>
     </tr>
     <tr>
-      <th id="T_df0e5_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
-      <td id="T_df0e5_row4_col0" class="data row4 col0" >0.265</td>
-      <td id="T_df0e5_row4_col1" class="data row4 col1" >0.023</td>
-      <td id="T_df0e5_row4_col2" class="data row4 col2" >0.423</td>
-      <td id="T_df0e5_row4_col3" class="data row4 col3" >0.504</td>
-      <td id="T_df0e5_row4_col4" class="data row4 col4" >1.000</td>
-      <td id="T_df0e5_row4_col5" class="data row4 col5" >-0.189</td>
+      <th id="T_37e48_level0_row4" class="row_heading level0 row4" >EURO STOXX 50</th>
+      <td id="T_37e48_row4_col0" class="data row4 col0" >0.265</td>
+      <td id="T_37e48_row4_col1" class="data row4 col1" >0.023</td>
+      <td id="T_37e48_row4_col2" class="data row4 col2" >0.423</td>
+      <td id="T_37e48_row4_col3" class="data row4 col3" >0.504</td>
+      <td id="T_37e48_row4_col4" class="data row4 col4" >1.000</td>
+      <td id="T_37e48_row4_col5" class="data row4 col5" >-0.189</td>
     </tr>
     <tr>
-      <th id="T_df0e5_level0_row5" class="row_heading level0 row5" >USDPLN</th>
-      <td id="T_df0e5_row5_col0" class="data row5 col0" >-0.368</td>
-      <td id="T_df0e5_row5_col1" class="data row5 col1" >-0.337</td>
-      <td id="T_df0e5_row5_col2" class="data row5 col2" >-0.371</td>
-      <td id="T_df0e5_row5_col3" class="data row5 col3" >-0.509</td>
-      <td id="T_df0e5_row5_col4" class="data row5 col4" >-0.480</td>
-      <td id="T_df0e5_row5_col5" class="data row5 col5" >1.000</td>
+      <th id="T_37e48_level0_row5" class="row_heading level0 row5" >USDPLN</th>
+      <td id="T_37e48_row5_col0" class="data row5 col0" >-0.368</td>
+      <td id="T_37e48_row5_col1" class="data row5 col1" >-0.337</td>
+      <td id="T_37e48_row5_col2" class="data row5 col2" >-0.371</td>
+      <td id="T_37e48_row5_col3" class="data row5 col3" >-0.509</td>
+      <td id="T_37e48_row5_col4" class="data row5 col4" >-0.480</td>
+      <td id="T_37e48_row5_col5" class="data row5 col5" >1.000</td>
     </tr>
   </tbody>
 </table>
@@ -766,6 +855,129 @@ symbols_list = ["Brent Crude Oil", "Gold", "Silver", "Bitcoin", "Ethereum", "USD
 investment_strategy_sim(data.close_prices, symbols_list)
 
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>symbol</th>
+      <th>Total invested PLN</th>
+      <th>Final investment value</th>
+      <th>Final profit</th>
+      <th>Final profit_perc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>Silver</td>
+      <td>9000.0</td>
+      <td>18264.05</td>
+      <td>9264.05</td>
+      <td>102.93</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Gold</td>
+      <td>9000.0</td>
+      <td>13248.05</td>
+      <td>4248.05</td>
+      <td>47.20</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Brent Crude Oil</td>
+      <td>9000.0</td>
+      <td>10399.41</td>
+      <td>1399.41</td>
+      <td>15.55</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Russell 2000</td>
+      <td>9000.0</td>
+      <td>10078.64</td>
+      <td>1078.64</td>
+      <td>11.98</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>VIX</td>
+      <td>9000.0</td>
+      <td>9966.51</td>
+      <td>966.51</td>
+      <td>10.74</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NASDAQ</td>
+      <td>9000.0</td>
+      <td>9830.26</td>
+      <td>830.26</td>
+      <td>9.23</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>S&amp;P 500</td>
+      <td>9000.0</td>
+      <td>9662.05</td>
+      <td>662.05</td>
+      <td>7.36</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Dow Jones</td>
+      <td>9000.0</td>
+      <td>9538.17</td>
+      <td>538.17</td>
+      <td>5.98</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>USDPLN</td>
+      <td>9000.0</td>
+      <td>8502.06</td>
+      <td>-497.94</td>
+      <td>-5.53</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Bitcoin</td>
+      <td>9000.0</td>
+      <td>7154.48</td>
+      <td>-1845.52</td>
+      <td>-20.51</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Ethereum</td>
+      <td>9000.0</td>
+      <td>7028.15</td>
+      <td>-1971.85</td>
+      <td>-21.91</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 After 18 months the return rate was around 8%, while the investing wasn't conducted identically to the strategy (different deposit dates, sometimes more money was invested), simulation results were similar.
  The simulation proved to be the most effective if one was to invest in commodities such as Silver, Gold or Oil. Indexes return rates were rather to be expected ~10%. What was surprising, that even though crypto prices were at their peak in the last 18-months, the return rate was the lowest, and would lose about 20%. It may be due to the fact, that cryptos would be purchased suboptimally at their highs.
