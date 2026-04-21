@@ -8,6 +8,10 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
 # IntelliJ / JetBrains
 .idea/
 *.iml
+
+# Quarto
+.quarto/

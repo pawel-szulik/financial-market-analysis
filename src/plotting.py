@@ -60,6 +60,7 @@ def add_market_events(ax, xmin, xmax, ymax) -> None:
 def rolling_volatility_plot(df: pd.DataFrame, window: int) -> None:
     temp = df.rolling(window).var(ddof=0).pow(0.5)
 
+    plt.figure(figsize=(10, 5))
     ax = sns.lineplot(data=temp, dashes=False, linewidth=0.7)
     ax.legend(loc='upper left', bbox_to_anchor=(0.9, 1))
     ymax = temp.max().max()
