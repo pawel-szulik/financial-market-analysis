@@ -76,6 +76,8 @@ The analysis is located in the `notebooks/analysis.ipynb` Jupyter Notebook, whic
 
 Additionally, a static HTML report (`notebooks/analysis.html`), generated using **Quarto**, is provided. It preserves full formatting of tables and styled outputs, which are not fully rendered in GitHub’s `.ipynb` preview.
 
+[Open HTML Report](https://github.com/pawel-szulik/financial-market-analysis/blob/main/notebooks/analysis.html)
+
 ## Key Insights
 
 - Bitcoin shows the highest volatility with a heavy-tailed, positively skewed return distribution.  
