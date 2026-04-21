@@ -45,9 +45,11 @@ financial-market-analysis/
 │   ├── forex/
 │   └── indexes/
 │
-├── notebooks/
+├── docs/
 │   ├── analysis_files/
-│   ├── analysis.html
+│   └── analysis.html
+│
+├── notebooks/
 │   └── analysis.ipynb
 │
 ├── src/
@@ -74,7 +76,7 @@ pip install -r requirements.txt
 
 The analysis is located in the `notebooks/analysis.ipynb` Jupyter Notebook, which can be executed to reproduce all computations and results.
 
-Additionally, a static HTML report (`notebooks/analysis.html`), generated using **Quarto**, is provided. It preserves full formatting of tables and styled outputs, which are not fully rendered in GitHub’s `.ipynb` preview.
+Additionally, a static HTML report (`docs/analysis.html`), generated using **Quarto**, is provided. It preserves full formatting of tables and styled outputs, which are not fully rendered in GitHub’s `.ipynb` preview.
 
 [Open HTML Report](https://pawel-szulik.github.io/financial-market-analysis/analysis.html)
 
